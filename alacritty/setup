@@ -1,0 +1,24 @@
+#!/bin/bash
+
+thecommand="alacritty"
+
+# Check if alacritty is found in path envx
+if ! command -v $thecommand &> /dev/null 
+then
+  echo "$thecommand could not be found!"
+  exit
+else
+  echo "$thecommand was found!"
+fi
+
+# Create config folder if necessary
+if [ ! -d $HOME/.config/alacritty ]
+then
+  mkdir -p $HOME/.config/alacritty
+  echo "Creating alacritty config folder"
+fi
+
+# Creating symbolic link
+echo "Creating symbolic link"
+ln -sf $DOTFILES/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
+

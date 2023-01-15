@@ -1,0 +1,28 @@
+# Source Z
+if [ -f $HOME/.zsh ]; then 
+  . $HOME/.zsh 
+fi
+
+# Shrink prompt
+PROMPT_DIRTRIM=2
+
+# Stop C-s accidental terminal stop
+stty stop undef
+
+# ------------- Environment variable ------------------ #
+export EDITOR=nvim # For ranger
+export GHFOLDER="$HOME/GitHub"
+export GHUSER="alex-naud"
+export DOTFILES="$GHFOLDER/$GHUSER/dotfiles"
+export NVIMSWAP="$HOME/.local/state/nvim/swap"
+export ACTIVEPROJECT="$HOME/active"
+export TMPDIRECTORY="$HOME/.tmp"
+
+# --------------------- alias ------------------------- #
+alias ipython='ipython3'
+alias vi='vim'
+alias dot="cd $DOTFILES"
+alias nswap="cd $NVIMSWAP"
+alias active="cd $ACTIVEPROJECT"
+alias tmp="cd $TMPDIRECTORY"
+alias ghf="cd $GHFOLDER/$GHUSER"

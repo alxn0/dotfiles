@@ -1,0 +1,122 @@
+" author: Alexandre Naud
+" note: design for VIM 8+
+
+" ------------------- General options --------------------------------
+set nocompatible " Disable compatibility with vi
+set nobackup " Do not save backup file
+set splitright " Vertical split on the right
+set background=dark " Fix different colors in tmux....
+
+" -------------------  General Editor options -------------------------
+filetype on " Enable filetype detection
+filetype plugin on " Load plugins for detected filetype
+filetype indent on " Load indent file by filetype
+
+set number " Add numbered lined
+
+" Use a line cursor within insert mode and a block cursor everywhere else.
+"
+" Reference chart of values:
+"   Ps = 0  -> blinking block.
+"   Ps = 1  -> blinking block (default).
+"   Ps = 2  -> steady block.
+"   Ps = 3  -> blinking underline.
+"   Ps = 4  -> steady underline.
+"   Ps = 5  -> blinking bar (xterm).
+"   Ps = 6  -> steady bar (xterm).
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" Set colored vertical lines and define color
+set colorcolumn=80 " Set colored vertical lines
+highlight ColorColumn ctermbg=8
+
+set shiftwidth=2 " Autoindent width
+set tabstop=2 " Tab width
+set expandtab " Use spaces instead of tabs
+
+" ------------------------ Completion ---------------------------
+set wildmenu " Enable auto completion menu
+set wildmode=list:longest " Make wild menu behave like bash
+
+" -------------------------- Mouse ------------------------------
+set mouse=a " Mouse enable in all modes
+
+" -------------------------- Mappings ---------------------------
+
+" Workaround to accept meta (alt) keys for terminal emulators
+" that send <escape>
+" Logic, remap <escape> to Meta when followed by range(a-z)
+" see https://unix.stackexchange.com/questions/14765/how-to-map-alt-key-in-vimrc
+
+for i in range(97,122)
+  let c = nr2char(i)
+  exec "map \e".c." <M-".c.">"
+  exec "map! \e".c." <M-".c.">"
+endfor
+
+" Set leader keys
+let mapleader = ';'
+
+" Yank to end of line (behave as D and C)
+nnoremap Y y$
+
+" Yank to global clipboard (need clipboard, check vim-gtk3)
+if has("clipboard")
+  vnoremap <C-y> "+y
+endif
+
+" Quit terminal mode
+tnoremap <Esc> <C-\><C-n>
+
+" Disable search highlighting when refreshing screen
+nnoremap <C-L> :nohl<CR><C-L> 
+
+" Edit / Reload .vimrc
+nnoremap <leader>rr :source ~/.vimrc<CR>
+nnoremap <leader>re :e ~/.vimrc<CR>
+
+" Open a terminal on the right
+nnoremap <leader>t :vertical botright term<CR>
+nnoremap <leader>t :vertical botright term<CR>
+
+" Navigation
+map <silent> <M-j> :wincmd j<CR>
+map <silent> <M-k> :wincmd k<CR>
+map <silent> <M-h> :wincmd h<CR>
+map <silent> <M-l> :wincmd l<CR>
+
+" Disable arrow keys for muscle memory
+noremap <up> :echoerr "Umm, use k instead"<CR>
+noremap <down> :echoerr "Umm, use j instead"<CR>
+noremap <left> :echoerr "Umm, use h instead"<CR>
+noremap <right> :echoerr "Umm, use l instead"<CR>
+
+" The followin are too restrictive...
+"inoremap <up> <NOP>
+"inoremap <down> <NOP>
+"inoremap <left> <NOP>
+"inoremap <right> <NOP>
+
+" -------------------------- Plugins ----------------------------
+
+" Only load plugins if Plug detected
+if filereadable(expand('~/.vim/autoload/plug.vim'))
+  
+  call plug#begin()
+  Plug 'jpalardy/vim-slime' " REPL for vim
+  Plug 'dense-analysis/ale' " Asychronous Lint Engine
+  call plug#end()
+
+  " vim-slime
+  let g:slime_target = 'tmux'
+
+  " ALE
+  let b:ale_linters = {
+        \ 'python': ['pyflakes'],
+        \}
+
+  let g:ale_sign_error = '>>'
+  let g:ale_sign_warning = '--'
+
+endif

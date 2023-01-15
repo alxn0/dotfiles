@@ -1,0 +1,24 @@
+#!/bin/bash
+
+thecommand="tmux"
+
+# Check if alacritty is found in path envx
+if ! command -v $the_command &> /dev/null 
+then
+  echo "$thecommand could not be found!"
+  exit
+fi
+
+echo "$thecommand was found!"
+
+# Clone Tmux Plugin manager
+#if [ ! -d $HOME/.tmux/plugins/tpm ]
+#then
+#  mkdir -p $HOME/.tmux/plugins/tpm
+#  echo "Creating $tmux plugin folder"
+#  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+#fi
+
+# Create symbolik ling
+echo "creating symbolik link"
+ln -sf $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf

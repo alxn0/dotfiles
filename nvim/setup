@@ -1,0 +1,34 @@
+#!/bin/bash
+thecommand="nvim"
+
+# Check if alacritty is found in path envx
+if ! command -v $thecommand &> /dev/null 
+then
+  echo "$thecommand could not be found!"
+  exit
+else
+  echo "$thecommand was found!"
+fi
+
+# Create config folder
+if [ ! -d $HOME/.config/nvim ]
+then
+  echo "Creating config folder"
+  mkdir -p $HOME/.config/nvim
+fi
+
+# Install packer.nvim
+if [ ! -d $HOME/.local/share/nvim/site/pack/packer ]
+then
+  echo "Installing packer.nvim"
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+   ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+fi  
+
+# Create symbolik links
+echo "Creating symbolic links"
+ln -sf $DOTFILES/nvim/init.lua $HOME/.config/nvim/init.lua
+ln -sf $DOTFILES/nvim/lua $HOME/.config/nvim/lua
+
+# Message
+echo -e "\nDon't forget to run :PackerInstall on firts startup!"
