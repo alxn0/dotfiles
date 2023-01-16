@@ -40,6 +40,7 @@ flatpak install com.sindresorhus.Caprine -y
 flatpak install org.videolan.VLC -y
 flatpak install org.qbittorrent.qBittorrent -y
 flatpak install com.brave.Browser -y
+flatpak install org.kryogenix.Pick -y
 
 # Install from pip
 echo -e "\n-- Installing from pip"
