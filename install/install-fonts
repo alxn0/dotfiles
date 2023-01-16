@@ -1,28 +1,37 @@
 #!/bin/bash
 
-echo -e "\n-------- Fonts -------------"
-
-if [ ! -d $HOME/.local/share/fonts ]
+if [ ! -d $HOME/.local/share/fonts/truetype ]
 then
-  echo "Creating ~/.local/share/fonts"
-  mkdir -p $HOME/.local/share/fonts;
+  echo "Creating ~/.local/share/fonts/truetype"
+  mkdir -p $HOME/.local/share/fonts/truetype
 fi
 
-if [! -f $HOME/.local/share/fonts/hasklug_nf_complete.otf ]
+if [ ! -d $HOME/.local/share/fonts/opentype ]
 then
-   echo "Installing hasklug nerd font"
-   wget -O $HOME/.local/share/fonts/hasklug_nf_complete.otf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hasklig/Regular/complete/Hasklug%20Nerd%20Font%20Complete.otf?raw=true 
-else
-   echo "hasklug nerd font already installed!"
+  echo "Creating ~/.local/share/fonts/opentype"
+  mkdir -p $HOME/.local/share/fonts/opentype
 fi
 
-if [! -f $HOME/.local/share/fonts/hasklug_nf_complete.otf ]
-then
-   echo "Installing hasklug nerd font mono"
-   wget -O $HOME/.local/share/fonts/hasklug_nf_complete_mono.otf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hasklig/Regular/complete/Hasklug%20Nerd%20Font%20Complete%20Mono.otf?raw=true 
-else
-   echo "hasklug nerd font mono already installed!"
-fi
+
+# Install fonts
+sudo find ./fonts -name "*.ttf" -exec cp "{}" ~/.local/share/fonts/truetype/ ";"
+sudo find ./fonts -name "*.otf" -exec cp "{}" ~/.local/share/fonts/opentype/ ";" 
+
+#if [! -f $HOME/.local/share/fonts/hasklug_nf_complete.otf ]
+#then
+#   echo "Installing hasklug nerd font"
+#   wget -O $HOME/.local/share/fonts/hasklug_nf_complete.otf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hasklig/Regular/complete/Hasklug%20Nerd%20Font%20Complete.otf?raw=true 
+#else
+#   echo "hasklug nerd font already installed!"
+#fi
+
+#if [! -f $HOME/.local/share/fonts/hasklug_nf_complete.otf ]
+#then
+#   echo "Installing hasklug nerd font mono"
+#   wget -O $HOME/.local/share/fonts/hasklug_nf_complete_mono.otf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hasklig/Regular/complete/Hasklug%20Nerd%20Font%20Complete%20Mono.otf?raw=true 
+#else
+#   echo "hasklug nerd font mono already installed!"
+#fi
 
 # Clear and restart cache
 echo "Clear and restart cache"
