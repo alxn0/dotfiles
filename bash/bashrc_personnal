@@ -26,3 +26,4 @@ alias nswap="cd $NVIMSWAP"
 alias active="cd $ACTIVEPROJECT"
 alias tmp="cd $TMPDIRECTORY"
 alias ghf="cd $GHFOLDER/$GHUSER"
+alias gs_recursive='find . -maxdepth 1 -mindepth 1 -type d -exec sh -c "echo {}; cd {}; git status -s; echo" \;'
