@@ -6,6 +6,7 @@ set nocompatible " Disable compatibility with vi
 set nobackup " Do not save backup file
 set splitright " Vertical split on the right
 set background=dark " Fix different colors in tmux....
+set modifiable      " Make a buffer modifiable...
 
 " -------------------  General Editor options -------------------------
 filetype on " Enable filetype detection
@@ -49,14 +50,15 @@ set mouse=a " Mouse enable in all modes
 " Logic, remap <escape> to Meta when followed by range(a-z)
 " see https://unix.stackexchange.com/questions/14765/how-to-map-alt-key-in-vimrc
 
-for i in range(97,122)
-  let c = nr2char(i)
-  exec "map \e".c." <M-".c.">"
-  exec "map! \e".c." <M-".c.">"
-endfor
+"for i in range(97,122)
+"  let c = nr2char(i)
+"  exec "map \e".c." <M-".c.">"
+"  exec "map! \e".c." <M-".c.">"
+"endfor
 
 " Set leader keys
 let mapleader = ';'
+let maplocalleader = ','
 
 " Yank to end of line (behave as D and C)
 nnoremap Y y$
@@ -80,23 +82,25 @@ nnoremap <leader>re :e ~/.vimrc<CR>
 nnoremap <leader>t :vertical botright term<CR>
 nnoremap <leader>t :vertical botright term<CR>
 
-" Navigation
-map <silent> <M-j> :wincmd j<CR>
-map <silent> <M-k> :wincmd k<CR>
-map <silent> <M-h> :wincmd h<CR>
-map <silent> <M-l> :wincmd l<CR>
+"" Navigation
+"map <silent> <M-j> :wincmd j<CR>
+"map <silent> <M-k> :wincmd k<CR>
+"map <silent> <M-h> :wincmd h<CR>
+"map <silent> <M-l> :wincmd l<CR>
 
 " Disable arrow keys for muscle memory
-noremap <up> :echoerr "Umm, use k instead"<CR>
-noremap <down> :echoerr "Umm, use j instead"<CR>
-noremap <left> :echoerr "Umm, use h instead"<CR>
-noremap <right> :echoerr "Umm, use l instead"<CR>
+"noremap <up> :echoerr "Umm, use k instead"<CR>
+"noremap <down> :echoerr "Umm, use j instead"<CR>
+"noremap <left> :echoerr "Umm, use h instead"<CR>
+"noremap <right> :echoerr "Umm, use l instead"<CR>
 
 " The followin are too restrictive...
 "inoremap <up> <NOP>
 "inoremap <down> <NOP>
 "inoremap <left> <NOP>
 "inoremap <right> <NOP>
+
+"noremap <localleader>p :echoerr "GOOOOOD!"
 
 " ----------------- Move line up and down -----------------------
 "  From https://stackoverflow.com/questions/741814/move-entire-line-up-and-down-in-vim
@@ -137,6 +141,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   call plug#begin()
   Plug 'jpalardy/vim-slime' " REPL for vim
   Plug 'dense-analysis/ale' " Asychronous Lint Engine
+  Plug 'jalvesaq/Nvim-R' " REPL for R
   call plug#end()
 
   " vim-slime
@@ -149,5 +154,28 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
   let g:ale_sign_error = '>>'
   let g:ale_sign_warning = '--'
+
+  "NVIM-R
+  let R_app = "radian"  	            " Set REPL
+  let R_cmd = 'R'                     " Set engine
+  let R_hl_term = 0                   " No terminal highlight, let Radian                                                                   
+  let R_args = []	                    " Arguments pass to term
+  let R_bracketed_paste = 1           " Close bracket
+  let R_assign = 0		                " Dont <- automaticaly
+  let R_external_term = "alacritty"   " Send to alacritty
+
+  " Set minimum width to open terminal on right
+  "let R_min_editor_width = 80 " Set minimum width of editor
+  "let R_rconsole_width = 50
+
+  " Change keymaps for line and selection to remain coherent with vimcmdline
+  function! s:customNvimRMappings()
+    nmap <buffer> <space> <Plug>RDSendLine
+    vmap <buffer> <space> <Plug>RSendSelection
+  endfunction
+  augroup myNvimR
+   au!
+   autocmd filetype r call s:customNvimRMappings()
+  augroup end
 
 endif
