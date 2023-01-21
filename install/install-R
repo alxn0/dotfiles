@@ -22,4 +22,6 @@ sudo apt install r-base-dev
 # Add binaries repository
 sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
 
-# TO DO -> Set .local R libraries with .Rprofile/.Renvironment, etc
+# TO DO
+## Auto install lintr from install.packages 
+## Set .local R libraries with .Rprofile/.Renvironment, etc
