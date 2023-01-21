@@ -45,17 +45,6 @@ set mouse=a " Mouse enable in all modes
 
 " -------------------------- Mappings ---------------------------
 
-" Workaround to accept meta (alt) keys for terminal emulators
-" that send <escape>
-" Logic, remap <escape> to Meta when followed by range(a-z)
-" see https://unix.stackexchange.com/questions/14765/how-to-map-alt-key-in-vimrc
-
-"for i in range(97,122)
-"  let c = nr2char(i)
-"  exec "map \e".c." <M-".c.">"
-"  exec "map! \e".c." <M-".c.">"
-"endfor
-
 " Set leader keys
 let mapleader = ';'
 let maplocalleader = ','
@@ -83,10 +72,10 @@ nnoremap <leader>t :vertical botright term<CR>
 nnoremap <leader>t :vertical botright term<CR>
 
 "" Navigation
-"map <silent> <M-j> :wincmd j<CR>
-"map <silent> <M-k> :wincmd k<CR>
-"map <silent> <M-h> :wincmd h<CR>
-"map <silent> <M-l> :wincmd l<CR>
+nmap <silent> <C-down> :wincmd j<CR>
+nmap <silent> <C-up> :wincmd k<CR>
+nmap <silent> <C-left> :wincmd h<CR>
+nmap <silent> <C-right> :wincmd l<CR>
 
 " Disable arrow keys for muscle memory
 "noremap <up> :echoerr "Umm, use k instead"<CR>
@@ -95,87 +84,34 @@ nnoremap <leader>t :vertical botright term<CR>
 "noremap <right> :echoerr "Umm, use l instead"<CR>
 
 " The followin are too restrictive...
-"inoremap <up> <NOP>
 "inoremap <down> <NOP>
+"inoremap <up> <NOP>
 "inoremap <left> <NOP>
 "inoremap <right> <NOP>
 
-"noremap <localleader>p :echoerr "GOOOOOD!"
-
-" ----------------- Move line up and down -----------------------
-"  From https://stackoverflow.com/questions/741814/move-entire-line-up-and-down-in-vim
-function! s:swap_lines(n1, n2)
-    let line1 = getline(a:n1)
-    let line2 = getline(a:n2)
-    call setline(a:n1, line2)
-    call setline(a:n2, line1)
-endfunction
-
-function! s:swap_up()
-    let n = line('.')
-    if n == 1
-        return
-    endif
-
-    call s:swap_lines(n, n - 1)
-    exec n - 1
-endfunction
-
-function! s:swap_down()
-    let n = line('.')
-    if n == line('$')
-        return
-    endif
-
-    call s:swap_lines(n, n + 1)
-    exec n + 1
-endfunction
-
-noremap <silent> <c-s-k> :call <SID>swap_up()<CR>
-noremap <silent> <c-s-j> :call <SID>swap_down()<CR>
 " -------------------------- Plugins ----------------------------
-
 " Only load plugins if Plug detected
 if filereadable(expand('~/.vim/autoload/plug.vim'))
   
   call plug#begin()
   Plug 'jpalardy/vim-slime' " REPL for vim
   Plug 'dense-analysis/ale' " Asychronous Lint Engine
-  Plug 'jalvesaq/Nvim-R' " REPL for R
   call plug#end()
 
   " vim-slime
   let g:slime_target = 'tmux'
+  let g:slime_ipython = 0
+  let g:slime_bracketed_paste = 1
+
+  xmap <space> <Plug>SlimeRegionSend
+  nmap <space> <Plug>SlimeParagraphSend
 
   " ALE
   let b:ale_linters = {
         \ 'python': ['pyflakes'],
+        \ 'R': ['lintr'],
         \}
 
   let g:ale_sign_error = '>>'
   let g:ale_sign_warning = '--'
-
-  "NVIM-R
-  let R_app = "radian"  	            " Set REPL
-  let R_cmd = 'R'                     " Set engine
-  let R_hl_term = 0                   " No terminal highlight, let Radian                                                                   
-  let R_args = []	                    " Arguments pass to term
-  let R_bracketed_paste = 1           " Close bracket
-  let R_assign = 0		                " Dont <- automaticaly
-  let R_external_term = "alacritty"   " Send to alacritty
-
-  " Set minimum width to open terminal on right
-  "let R_min_editor_width = 80 " Set minimum width of editor
-  "let R_rconsole_width = 50
-
-  " Change keymaps for line and selection to remain coherent with vimcmdline
-  function! s:customNvimRMappings()
-    nmap <buffer> <space> <Plug>RDSendLine
-    vmap <buffer> <space> <Plug>RSendSelection
-  endfunction
-  augroup myNvimR
-   au!
-   autocmd filetype r call s:customNvimRMappings()
-  augroup end
-
 endif
