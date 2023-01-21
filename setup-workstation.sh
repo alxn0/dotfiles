@@ -16,9 +16,6 @@ sudo apt upgrade  -y
 
 sudo apt install firefox -y
 sudo apt install alacritty -y
-sudo apt install r-base -y
-sudo apt install python3 -y
-sudo apt install python3-pip -y
 sudo apt install vim -y
 sudo apt install neovim -y
 sudo apt install htop -y
@@ -46,9 +43,6 @@ flatpak install org.kryogenix.Pick -y
 echo -e "\n-- Installing from pip"
 pip install tldr 
 pip install ipython 
-pip install jedi-language-server 
-pip install jupyterlab 
-pip install radian
 
 # Install fonts
 echo -e "\n-- Installing fonts"
@@ -57,6 +51,14 @@ $DOTFILES/install/install-fonts
 # Install gh
 echo -e "\n-- Installing gh"
 $DOTFILES/install/install-gh
+
+# Install R
+echo -e "\n-- Installing R"
+$DOTFILES/install/install-R
+
+# Install postgresql
+echo -e "\n-- Installing PostgreSQL"
+$DOTFILES/install/install-postgre
 
 # Source all setup
 echo -e "\n-- App configurations"
