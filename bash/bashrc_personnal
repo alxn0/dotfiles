@@ -21,9 +21,9 @@ export TMPDIRECTORY="$HOME/.tmp"
 # --------------------- alias ------------------------- #
 alias ipython='ipython3'
 alias vi='vim'
-alias dot="cd $DOTFILES"
-alias nswap="cd $NVIMSWAP"
-alias active="cd $ACTIVEPROJECT"
-alias tmp="cd $TMPDIRECTORY"
-alias ghf="cd $GHFOLDER/$GHUSER"
+alias dot='cd $DOTFILES'
+alias tmp='cd $TMPDIRECTORY'
+alias ghf='cd $GHFOLDER/$GHUSER'
 alias gs_recursive='find . -maxdepth 1 -mindepth 1 -type d -exec sh -c "echo {}; cd {}; git status -s; echo" \;'
+alias create_venv='python3 -m venv env && source env/bin/activate && pip install ipython && hash -r'
+alias activate_venv='source env/bin/activate'
