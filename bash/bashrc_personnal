@@ -19,6 +19,7 @@ export TMPDIRECTORY="$HOME/.tmp"
 
 # --------------------- alias ------------------------- #
 alias ipython='ipython3'
+alias python='python3'
 alias vi='vim'
 alias dot='cd $DOTFILES'
 alias tmp='cd $TMPDIRECTORY'
