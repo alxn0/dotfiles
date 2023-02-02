@@ -10,7 +10,7 @@ PROMPT_DIRTRIM=2
 stty stop undef
 
 # ------------- Environment variable ------------------ #
-export EDITOR=nvim # For ranger
+export EDITOR=vim
 export GHFOLDER="$HOME/GitHub"
 export GHUSER="alex-naud"
 export DOTFILES="$GHFOLDER/$GHUSER/dotfiles"
