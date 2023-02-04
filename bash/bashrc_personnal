@@ -11,10 +11,8 @@ stty stop undef
 
 # ------------- Environment variable ------------------ #
 export EDITOR=vim
-export GHFOLDER="$HOME/GitHub"
-export GHUSER="alex-naud"
-export DOTFILES="$GHFOLDER/$GHUSER/dotfiles"
-export ACTIVEPROJECT="$HOME/active"
+export DOTFILES="$HOME/dotfiles"
+export WORKSPACE="$HOME/Workspace"
 export TMPDIRECTORY="$HOME/.tmp"
 
 # --------------------- alias ------------------------- #
@@ -22,8 +20,8 @@ alias ipython='ipython3'
 alias python='python3'
 alias vi='vim'
 alias dot='cd $DOTFILES'
+alias ws='cd $WORKSPACE'
 alias tmp='cd $TMPDIRECTORY'
-alias ghf='cd $GHFOLDER/$GHUSER'
 alias gs_recursive='find . -maxdepth 1 -mindepth 1 -type d -exec sh -c "echo {}; cd {}; git status -s; echo" \;'
 alias venv_create='python3 -m venv venv && source venv/bin/activate && pip install ipython && hash -r'
 alias venv_activate='source venv/bin/activate'
