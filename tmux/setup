@@ -19,6 +19,10 @@ echo "$thecommand was found!"
 #  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 #fi
 
-# Create symbolik ling
+# Create symbolik link
 echo "creating symbolik link"
 ln -sf $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
+
+# Add autocompletion (.bash_completion is autoloaded by bash-completion)
+echo "Downloading autocompletion"
+curl https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux > ~/.bash_completion
