@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Create symbolic link
+echo "Create symbolic links"
+ln -sf $DOTFILES/ipython/ipython_config.py $HOME/.ipython/profile_default/ipython_config.py
