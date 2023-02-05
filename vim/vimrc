@@ -96,6 +96,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   call plug#begin()
   Plug 'jpalardy/vim-slime' " REPL for vim
   Plug 'dense-analysis/ale' " Asychronous Lint Engine
+  "Plug 'vim-airline/vim-airline' " Better bottomline
+  "Plug 'ryanoasis/vim-devicons' " Dev icons
+  "Plug 'preservim/nerdtree' " File explorer
   call plug#end()
 
   " vim-slime
