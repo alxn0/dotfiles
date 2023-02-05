@@ -24,31 +24,35 @@ alias dot='cd $DOTFILES'
 alias tmp='cd $TMPDIRECTORY'
 alias ghf='cd $GHFOLDER/$GHUSER'
 alias gs_recursive='find . -maxdepth 1 -mindepth 1 -type d -exec sh -c "echo {}; cd {}; git status -s; echo" \;'
-alias activate_python_venv='source venv/bin/activate'
 
 # ---------------------- functions ----------------------#
 
 # Function to create a python virtual environment, source it, install ipython,
 # and modify the ultratb.py file to set tb_highlight to 'bg:ansired'.
-create_python_venv() {
-  echo "Creating Python virtual ..."
-  python3 -m venv ./venv/ && \
+function venv {
+  if [ -d ./venv/ ]; then
+    source ./venv/bin/activate
+  else
+    
+    echo "Creating Python virtual ..."
+    python3 -m venv ./venv/ && \
 
-  echo "Sourcing virtual environment..."
-  source ./venv/bin/activate && \
+    echo "Sourcing virtual environment..."
+    source ./venv/bin/activate && \
 
-  echo "Installing ipython..."
-  pip install ipython --quiet && \
+    echo "Installing ipython..."
+    pip install ipython --quiet && \
 
-  echo "Refreshing shell hash table..."
-  hash -r || \
-    {
-      local error_message="The command failed: "
-      [[ $? -eq 1 ]] && error_message+="'python3 -m venv ./venv/'"
-      [[ $? -eq 2 ]] && error_message+="'source ./venv/bin/activate'"
-      [[ $? -eq 3 ]] && error_message+="'pip install ipython'"
-      [[ $? -eq 4 ]] && error_message+="'sed ...'"
-      [[ $? -eq 5 ]] && error_message+="'hash -r'"
-      echo "$error_message"
-    }
+    echo "Refreshing shell hash table..."
+    hash -r || \
+      {
+        local error_message="The command failed: "
+        [[ $? -eq 1 ]] && error_message+="'python3 -m venv ./venv/'"
+        [[ $? -eq 2 ]] && error_message+="'source ./venv/bin/activate'"
+        [[ $? -eq 3 ]] && error_message+="'pip install ipython'"
+        [[ $? -eq 4 ]] && error_message+="'sed ...'"
+        [[ $? -eq 5 ]] && error_message+="'hash -r'"
+        echo "$error_message"
+      }
+  fi
 }
