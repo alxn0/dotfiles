@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Create folders in .local for truetype and opentype fonts
 if [ ! -d $HOME/.local/share/fonts/truetype ]
 then
   echo "Creating ~/.local/share/fonts/truetype"
@@ -14,24 +15,11 @@ fi
 
 
 # Install fonts
+echo "Installing truetype fonts..."
 sudo find ./fonts -name "*.ttf" -exec cp "{}" ~/.local/share/fonts/truetype/ ";"
+
+echo "Installing opentype fonts..."
 sudo find ./fonts -name "*.otf" -exec cp "{}" ~/.local/share/fonts/opentype/ ";" 
-
-#if [! -f $HOME/.local/share/fonts/hasklug_nf_complete.otf ]
-#then
-#   echo "Installing hasklug nerd font"
-#   wget -O $HOME/.local/share/fonts/hasklug_nf_complete.otf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hasklig/Regular/complete/Hasklug%20Nerd%20Font%20Complete.otf?raw=true 
-#else
-#   echo "hasklug nerd font already installed!"
-#fi
-
-#if [! -f $HOME/.local/share/fonts/hasklug_nf_complete.otf ]
-#then
-#   echo "Installing hasklug nerd font mono"
-#   wget -O $HOME/.local/share/fonts/hasklug_nf_complete_mono.otf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hasklig/Regular/complete/Hasklug%20Nerd%20Font%20Complete%20Mono.otf?raw=true 
-#else
-#   echo "hasklug nerd font mono already installed!"
-#fi
 
 # Clear and restart cache
 echo "Clear and restart cache"
