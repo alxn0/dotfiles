@@ -20,11 +20,14 @@ export TMPDIRECTORY="$HOME/.tmp"
 alias ipython='ipython3'
 alias python='python3'
 alias vi='vim'
+
 alias dot='cd $DOTFILES'
 alias tmp='cd $TMPDIRECTORY'
 alias ghf='cd $GHFOLDER/$GHUSER'
+
 alias gs_recursive='find . -maxdepth 1 -mindepth 1 -type d -exec sh -c "echo {}; cd {}; git status -s; echo" \;'
 
+alias analysis='source $HOME/.local/python_venv/analysis/bin/activate'
 # ---------------------- functions ----------------------#
 
 # Function to create a python virtual environment, source it, install ipython,

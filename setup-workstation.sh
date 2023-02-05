@@ -66,6 +66,7 @@ echo -e "\n-alacritty"; $DOTFILES/alacritty/setup
 echo -e "\n-bash"; $DOTFILES/bash/setup
 echo -e "\n-vim"; $DOTFILES/vim/setup
 echo -e "\n-tmux"; $DOTFILES/tmux/setup
+echo -e "\n-python"; $DOTFILES/python/setup
 
 # Final message
 echo -e "\n-- Done executing setup scripts"
