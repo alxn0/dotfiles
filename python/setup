@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Install or upgrade pip
+## Check if pip iexists in $PATH and is executable
+if [ ! command -v pip &> /dev/null ]; then
+  echo "Pip is not installed, installing pip..."
+  sudo apt install python3-pip
+else
+  echo "Pip is installed, looking for upgrade..."
+  python3 -m pip install --upgrade pip
+fi
+
+# Install some package in global python
+echo "Installing wheel..."; pip install wheel --quiet
+echo "Installing tldr..."; pip install tldr --quiet
+echo "Installing ipython..."; pip install ipython --quiet
+ 
+# Create symbolic link
+echo "Create symbolic links for ipython config"
+ln -sf $DOTFILES/ipython/ipython_config.py \
+  $HOME/.ipython/profile_default/ipython_config.py
+
+# Creating global virtual environments
+VENV_FOLDER="$HOME/.local/python_venv/"
+
+if [ ! -d "$VENV_FOLDER" ]; then
+  mkdir "$VENV_FOLDER"
+fi
+
+## Analysis
+ANALYSIS="$VENV_FOLDER/analysis"
+
+if [ ! -d "$ANALYSIS" ]; then
+  
+  # Creating venv
+  echo "Creating analysis venv"
+  python3 -m venv $ANALYSIS
+  
+  # Install libraries
+  source $ANALYSIS/bin/activate
+  pip install ipython numpy pandas polars matplotlib --quiet
+  deactivate
+
+fi
