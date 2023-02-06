@@ -14,6 +14,7 @@ fi
 echo "Installing wheel..."; pip install wheel --quiet
 echo "Installing tldr..."; pip install tldr --quiet
 echo "Installing ipython..."; pip install ipython --quiet
+echo "Installing jupyterlab..."; pip install jupyterlab --quiet
  
 # Create symbolic link
 echo "Create symbolic links for ipython config"
@@ -36,9 +37,12 @@ if [ ! -d "$ANALYSIS" ]; then
   echo "Creating analysis venv"
   python3 -m venv $ANALYSIS
   
-  # Install libraries
+  # Install libraries and ipykernel
   source $ANALYSIS/bin/activate
-  pip install ipython numpy pandas polars matplotlib --quiet
+  pip install wheel ipython numpy pandas polars matplotlib \
+    scikit-learn scipy ipykernel --quiet
+  python3 -m ipykernel install --user --name=analysis  
   deactivate
 
 fi
+
