@@ -24,7 +24,6 @@ sudo apt install default-jre libreoffice-java-common # For libre office
 
 # Install from flatpak
 echo -e "\n-- Installing various app from flatpak"
-flatpak install org.gottcode.Kapow -y
 flatpak install org.zotero.Zotero -y
 flatpak install org.inkscape.Inkscape -y
 flatpak install org.gimp.GIMP -y
@@ -41,7 +40,6 @@ flatpak install org.kryogenix.Pick -y
 # Install from pip
 echo -e "\n-- Installing from pip"
 pip install tldr 
-pip install ipython 
 
 # Install fonts
 echo -e "\n-- Installing fonts"

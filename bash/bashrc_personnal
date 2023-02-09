@@ -13,7 +13,7 @@ stty stop undef
 export EDITOR=vim
 export GHFOLDER="$HOME/GitHub"
 export GHUSER="alex-naud"
-export DOTFILES="$GHFOLDER/$GHUSER/dotfiles/ubuntu"
+export DOTFILES="$GHFOLDER/$GHUSER/dotfiles"
 export TMPDIRECTORY="$HOME/.tmp"
 
 # --------------------- alias ------------------------- #
