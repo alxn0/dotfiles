@@ -83,11 +83,32 @@ nmap <silent> <C-right> :wincmd l<CR>
 "noremap <left> :echoerr "Umm, use h instead"<CR>
 "noremap <right> :echoerr "Umm, use l instead"<CR>
 
-" The followin are too restrictive...
-"inoremap <down> <NOP>
-"inoremap <up> <NOP>
-"inoremap <left> <NOP>
-"inoremap <right> <NOP>
+" ------------------------ Status line --------------------------
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+
+set laststatus=2
+
+set statusline=
+set statusline+=%#PmenuSel#                " Black backgroun
+set statusline+=%{StatuslineGit()}         " Show git branch
+set statusline+=%#LineNr#                  " Colored file path
+set statusline+=\ %f                       " File path  
+set statusline+=%m                         " Save status (modification)
+set statusline+=%#PmenuSel#                " Black backgroun
+set statusline+=%=                         " Align right (following stuff)
+"set statusline+=%#CursorColumn#
+set statusline+=%y                                           " File type
+set statusline+=\ %6{&fileencoding?&fileencoding:&encoding}  " Encoding
+set statusline+=\:%{&fileformat}                             " Format
+set statusline+=\ %4l,%c                                     " Line, columns
+set statusline+=\ %4p%%                                      " File percent
 
 " -------------------------- Plugins ----------------------------
 " Only load plugins if Plug detected
