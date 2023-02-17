@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Install venv
+sudo apt install python3-venv
+
 # Install or upgrade pip
 ## Check if pip iexists in $PATH and is executable
 if [ ! command -v pip &> /dev/null ]; then
