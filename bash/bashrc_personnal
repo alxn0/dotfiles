@@ -36,8 +36,7 @@ alias gs_recursive='find . -maxdepth 1 -mindepth 1 -type d -exec sh -c "echo {};
 alias analysis='source $HOME/.local/python_venv/analysis/bin/activate'
 # ---------------------- functions ----------------------#
 
-# Function to create a python virtual environment, source it, install ipython,
-# and modify the ultratb.py file to set tb_highlight to 'bg:ansired'.
+# Create a python virtual environment and install ipython
 function venv {
   if [ -d ./venv/ ]; then
     source ./venv/bin/activate
