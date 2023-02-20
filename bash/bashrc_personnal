@@ -58,9 +58,23 @@ function venv {
         [[ $? -eq 1 ]] && error_message+="'python3 -m venv ./venv/'"
         [[ $? -eq 2 ]] && error_message+="'source ./venv/bin/activate'"
         [[ $? -eq 3 ]] && error_message+="'pip install ipython'"
-        [[ $? -eq 4 ]] && error_message+="'sed ...'"
         [[ $? -eq 5 ]] && error_message+="'hash -r'"
         echo "$error_message"
       }
   fi
 }
+
+# Check if fetch status of child folder 
+function check_git_remote_status {
+    for d in */ ; do
+        echo "Checking $d"
+        cd "$d" || exit 
+        if git fetch --dry-run &>/dev/null; then
+            echo "Up to date"
+        else
+            echo "Out of date"
+        fi
+        cd .. # Go back to the parent directory
+    done
+}
+
