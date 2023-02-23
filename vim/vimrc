@@ -103,16 +103,29 @@ set statusline=
 set statusline+=%#PmenuSel#                " Black backgroun
 set statusline+=%{StatuslineGit()}         " Show git branch
 set statusline+=%#LineNr#                  " Colored file path
-set statusline+=\ %f                       " File path  
+"set statusline+=\ %{expand('%:p:h:t')}/%t  " File name with parent directory
+set statusline+=\ %f                        " The path relative to current dir
 set statusline+=%m                         " Save status (modification)
+set statusline+=%r                         " Read only flag
 set statusline+=%#PmenuSel#                " Black backgroun
 set statusline+=%=                         " Align right (following stuff)
-"set statusline+=%#CursorColumn#
 set statusline+=%y                                           " File type
-set statusline+=\ %6{&fileencoding?&fileencoding:&encoding}  " Encoding
-set statusline+=\:%{&fileformat}                             " Format
-set statusline+=\ %4l,%c                                     " Line, columns
-set statusline+=\ %4p%%                                      " File percent
+set statusline+=\                          " White space
+
+" Encoding with warning if not UTF-8
+set statusline+=%#warningmsg#%6{(&fenc!='utf-8'&&&fenc!='')?''.&fenc.'':''}
+set statusline+=%#PmenuSel#%6{(&fenc=='utf-8'&&&fenc!='')?''.&fenc.'':''}
+
+" File format with warning if not unix
+set statusline+=%#warningmsg#%{&ff!='unix'?':'.&ff.'':''}
+set statusline+=%#PmenuSel#%{&ff=='unix'?':'.&ff.'':''}
+
+"set statusline+=\ %6{&fileencoding?&fileencoding:&encoding}  " Encoding
+"set statusline+=\:%{&fileformat}                             " Format
+
+set statusline+=%#PmenuSel#                " Black background
+set statusline+=\ %4l,%c                   " Line, columns
+set statusline+=\ %4p%%                    " File percent
 
 " -------------------------- Plugins ----------------------------
 " Only load plugins if Plug detected
