@@ -41,6 +41,7 @@ flatpak install org.kryogenix.Pick -y
 
 # Install from pip
 echo -e "\n-- Installing from pip"
+sudo apt install python3-pip
 pip install tldr 
 
 # Install fonts

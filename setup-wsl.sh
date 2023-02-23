@@ -25,6 +25,7 @@ sudo apt install fzf -y
 
 # Install from pip
 echo -e "\n-- Installing from pip"
+sudo apt install python3-pip -y
 pip install tldr 
 pip install ipython 
 pip install radian
