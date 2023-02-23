@@ -57,6 +57,10 @@ if has("clipboard")
   vnoremap <C-y> "+y
 endif
 
+" Yank to tmux clipboard
+vnoremap <leader>y y<cr>:call system("tmux load-buffer -", @0)<cr>
+nnoremap <leader>p :let @0 = system("tmux save-buffer -")<cr>"0p<cr>g;
+
 " Quit terminal mode
 tnoremap <Esc> <C-\><C-n>
 
