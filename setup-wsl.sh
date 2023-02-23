@@ -20,6 +20,8 @@ sudo apt install python3-pip -y
 sudo apt install vim -y
 sudo apt install tmux -y
 sudo apt install tree -y
+sudo apt install ripgrep -y
+sudo apt install fzf -y
 
 # Install from pip
 echo -e "\n-- Installing from pip"

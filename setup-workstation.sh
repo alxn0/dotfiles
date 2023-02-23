@@ -20,7 +20,9 @@ sudo apt install vim -y
 sudo apt install htop -y
 sudo apt install tmux -y
 sudo apt install tree -y
-sudo apt install default-jre libreoffice-java-common # For libre office
+sudo apt install fzf -y
+sudo apt install ripgreg -y
+sudo apt install default-jre libreoffice-java-common -y # For libre office
 
 # Install from flatpak
 echo -e "\n-- Installing various app from flatpak"
