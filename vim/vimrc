@@ -36,6 +36,8 @@ set shiftwidth=2 " Autoindent width
 set tabstop=2 " Tab width
 set expandtab " Use spaces instead of tabs
 
+set hlsearch " Highlight words when searched
+
 " ------------------------ Completion ---------------------------
 set wildmenu " Enable auto completion menu
 set wildmode=list:longest " Make wild menu behave like bash
@@ -58,7 +60,7 @@ if has("clipboard")
 endif
 
 " Yank to tmux clipboard
-vnoremap <leader>y y<cr>:call system("tmux load-buffer -", @0)<cr>
+vnoremap <leader>y y<cr>:call system("tmux load-buffer -", @0)<cr>gv
 nnoremap <leader>p :let @0 = system("tmux save-buffer -")<cr>"0p<cr>g;
 
 " Quit terminal mode
@@ -103,8 +105,8 @@ set statusline=
 set statusline+=%#PmenuSel#                " Black backgroun
 set statusline+=%{StatuslineGit()}         " Show git branch
 set statusline+=%#LineNr#                  " Colored file path
-"set statusline+=\ %{expand('%:p:h:t')}/%t  " File name with parent directory
-set statusline+=\ %f                        " The path relative to current dir
+set statusline+=\ %{expand('%:p:h:t')}/%t  " File name with parent directory
+"set statusline+=\ %f                        " The path relative to current dir
 set statusline+=%m                         " Save status (modification)
 set statusline+=%r                         " Read only flag
 set statusline+=%#PmenuSel#                " Black backgroun
