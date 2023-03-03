@@ -60,6 +60,10 @@ $DOTFILES/install/install-R
 echo -e "\n-- Installing PostgreSQL"
 $DOTFILES/install/install-postgre
 
+# Install docker
+echo -e "\n-- Installing Docker"
+$DOTFILES/install/install-docker
+
 # Source all setup
 echo -e "\n-- App configurations"
 
