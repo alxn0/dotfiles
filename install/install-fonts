@@ -22,5 +22,7 @@ echo "Installing opentype fonts..."
 sudo find $DOTFILES/install/fonts -name "*.otf" -exec cp "{}" ~/.local/share/fonts/opentype/ ";" 
 
 # Clear and restart cache
-echo "Clear and restart cache"
-fc-cache -f -v
+echo "Clear and restart cache...."
+fc-cache -f 
+echo "Clear and restart cache....done!"
+
