@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Install from flatpak
+flatpak install org.zotero.Zotero -y
+flatpak install org.inkscape.Inkscape -y
+flatpak install org.gimp.GIMP -y
+flatpak install org.keepassxc.KeePassXC -y
+flatpak install com.slack.Slack -y
+flatpak install org.signal.Signal -y
+flatpak install com.sindresorhus.Caprine -y
+flatpak install org.videolan.VLC -y
+flatpak install org.qbittorrent.qBittorrent -y
+flatpak install com.brave.Browser -y
+flatpak install org.kryogenix.Pick -y
