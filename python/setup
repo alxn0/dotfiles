@@ -1,17 +1,11 @@
 #!/bin/bash
 
-# Install venv
-sudo apt install python3-venv
+# In case it is not in path
+export PATH="$HOME/.local/bin:$PATH"
 
-# Install or upgrade pip
-## Check if pip iexists in $PATH and is executable
-if [ ! command -v pip &> /dev/null ]; then
-  echo "Pip is not installed, installing pip..."
-  sudo apt install python3-pip
-else
-  echo "Pip is installed, looking for upgrade..."
-  python3 -m pip install --upgrade pip
-fi
+# Install venv and pip
+sudo apt install python3-venv -y
+sudo apt install python3-pip -y
 
 # Install some package in global python
 echo "Installing wheel..."; pip install wheel --quiet
@@ -19,9 +13,14 @@ echo "Installing tldr..."; pip install tldr --quiet
 echo "Installing ipython..."; pip install ipython --quiet
 echo "Installing jupyterlab..."; pip install jupyterlab --quiet
  
-# Create symbolic link
+# Create ipython config
+if [ ! -d "$HOME/.ipython/profile_default" ]; then
+  echo "Creating default ipython profile"
+  ipython3 profile create
+fi
+
 echo "Create symbolic links for ipython config"
-ln -sf $DOTFILES/ipython/ipython_config.py \
+ln -sf $DOTFILES/python/ipython_config.py \
   $HOME/.ipython/profile_default/ipython_config.py
 
 # Creating global virtual environments
@@ -43,7 +42,7 @@ if [ ! -d "$ANALYSIS" ]; then
   # Install libraries and ipykernel
   source $ANALYSIS/bin/activate
   pip install wheel ipython numpy pandas polars matplotlib \
-    scikit-learn scipy ipykernel --quiet
+    scikit-learn scipy ipykernel radian --quiet
   python3 -m ipykernel install --user --name=analysis  
   deactivate
 
