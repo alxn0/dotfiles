@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# From get.docker
+is_wsl() {
+	case "$(uname -r)" in
+	*microsoft* ) true ;; # WSL 2
+	*Microsoft* ) true ;; # WSL 1
+	* ) false;;
+	esac
+}
+
+# Check if $DOTFILES is presence
+if [ -z "$DOTFILES" ] # Check if $DOTFILES has legth equal to zero
+then
+  echo "Define DOTFILES as PWD"
+  export DOTFILES=$PWD
+else
+  echo "DOTFILES is define as $DOTFILES"
+fi
+
+# Only on linux workstation
+if ! is_wsl; then
+  echo -e "\n-alacritty"; $DOTFILES/alacritty/setup
+fi
+
+# Workstation and WSL 
+echo -e "\n-bash"; $DOTFILES/bash/setup
+echo -e "\n-vim"; $DOTFILES/vim/setup
+echo -e "\n-tmux"; $DOTFILES/tmux/setup
+echo -e "\n-python"; $DOTFILES/python/setup
