@@ -15,6 +15,9 @@ PROMPT_DIRTRIM=2
 # Stop C-s accidental terminal stop
 stty stop undef
 
+# -------------- PATH --------------------------------- #
+export PATH="$HOME/.local/bin:$PATH"
+
 # ------------- Environment variable ------------------ #
 export EDITOR=vim
 export GHFOLDER="$HOME/GitHub"
