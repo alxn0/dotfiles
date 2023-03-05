@@ -9,15 +9,6 @@ is_wsl() {
 	esac
 }
 
-# Check if $DOTFILES is presence
-if [ -z "$DOTFILES" ] # Check if $DOTFILES has legth equal to zero
-then
-  echo "Define DOTFILES as PWD"
-  export DOTFILES=$PWD
-else
-  echo "DOTFILES is define as $DOTFILES"
-fi
-
 # Updating repository and upgrading system 
 echo -e "\n-- Update and upgrade" 
 sudo apt update
@@ -28,19 +19,19 @@ sudo apt install vim tmux tree fzf -qq
 
 # Install gh
 echo -e "\n-- Installing gh"
-$DOTFILES/install/install-gh
+"$PWD/install/install-gh"
 
 # Install R
 echo -e "\n-- Installing R"
-$DOTFILES/install/install-R
+"$PWD/install/install-R"
 
 # Install postgresql
 echo -e "\n-- Installing PostgreSQL"
-$DOTFILES/install/install-postgre
+"$PWD/install/install-postgre"
 
 # Install docker
 echo -e "\n-- Installing Docker"
-$DOTFILES/install/install-docker
+"$PWD/install/install-docker"
 
 # ==== Only for linux workstation ====== #
 if ! is_wsl
@@ -52,24 +43,18 @@ then
 
   # Install from flatpak
   echo -e "\n-- Installing various app from flatpak"
-  $DOTFILES/install/install-from-flatpak
+  "$PWD/install/install-from-flatpak"
 
   # Install fonts
   echo -e "\n-- Installing fonts"
-  $DOTFILES/install/install-fonts
+  "$PWD/install/install-fonts"
 
   # Manual installation
   echo -e "\n-- Done executing setup scripts"
   echo "Still need to manually install some application"
-  echo "exec $DOTFILES/install/install-web-releases to display releases in firefox"
+  echo "exec $PWD/install/install-web-releases to display releases in firefox"
 fi
 
 # Source all setup
 echo -e "\n-- App configurations"
-
-echo -e "\n-alacritty"; $DOTFILES/alacritty/setup
-echo -e "\n-bash"; $DOTFILES/bash/setup
-echo -e "\n-vim"; $DOTFILES/vim/setup
-echo -e "\n-tmux"; $DOTFILES/tmux/setup
-echo -e "\n-python"; $DOTFILES/python/setup
-
+"$PWD/configs"
