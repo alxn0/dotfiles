@@ -1,15 +1,4 @@
-#!/bin/bash
-thecommand="vim"
-
-# Check if alacritty is found in path envx
-if ! command -v $thecommand &> /dev/null 
-then
-  echo "$thecommand could not be found!"
-  exit
-else
-  echo "$thecommand was found!"
-fi
-
+#!/bin/sh
 # Install vim-plug (Download plug.vim and put it in autoload directory)
 if [ -f ~/.vim/autoload/plug.vim ];
 then
@@ -22,4 +11,4 @@ fi
 
 # Create symbolic link
 echo "Creating symbolic links"
-ln -sf $DOTFILES/vim/vimrc $HOME/.vimrc
+ln -sf "$PWD/vimrc" "$HOME/.vimrc"

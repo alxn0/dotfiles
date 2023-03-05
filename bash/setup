@@ -1,22 +1,22 @@
 #!/bin/bash
 
 # Append bashrc
-if grep -Fxq "# Source personnal configurations" $HOME/.bashrc
+if grep -Fxq "# Source personnal configurations" "$HOME/.bashrc"
 then
   echo ".bashrc is already append"
 else
   echo "appending .bashrc"
-  echo -e "\n#  Source personnal configurations" >> $HOME/.bashrc
-  echo "if [ -f ~/.bashrc_personnal ]; then" >> $HOME/.bashrc
-  echo "  . ~/.bashrc_personnal" >> $HOME/.bashrc
-  echo "fi" >> $HOME/.bashrc
+  echo -e "\n#  Source personnal configurations" >> "$HOME/.bashrc"
+  echo "if [ -f ~/.bashrc_personnal ]; then" >> "$HOME/.bashrc"
+  echo "  . ~/.bashrc_personnal" >> "$HOME/.bashrc"
+  echo "fi" >> "$HOME/.bashrc"
 fi
 
 # Creating symbolic link
 echo "create symbolic links"
-ln -sf $DOTFILES/bash/bashrc_personnal $HOME/.bashrc_personnal
-ln -sf $DOTFILES/bash/inputrc $HOME/.inputrc
+ln -sf "$PWD/bashrc_personnal" "$HOME/.bashrc_personnal"
+ln -sf "$PWD/inputrc" "$HOME/.inputrc"
 
 # Copy zscript
 echo "Copying zscripts"
-cp -f $DOTFILES/bash/z.sh $HOME/.zsh
+cp -f "$PWD/z.sh" "$HOME/.zsh"

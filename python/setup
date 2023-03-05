@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # In case it is not in path
 export PATH="$HOME/.local/bin:$PATH"
@@ -20,8 +20,8 @@ if [ ! -d "$HOME/.ipython/profile_default" ]; then
 fi
 
 echo "Create symbolic links for ipython config"
-ln -sf $DOTFILES/python/ipython_config.py \
-  $HOME/.ipython/profile_default/ipython_config.py
+ln -sf "$PWD/ipython_config.py" \
+  "$HOME/.ipython/profile_default/ipython_config.py"
 
 # Creating global virtual environments
 VENV_FOLDER="$HOME/.local/python_venv/"
@@ -37,10 +37,10 @@ if [ ! -d "$ANALYSIS" ]; then
   
   # Creating venv
   echo "Creating analysis venv"
-  python3 -m venv $ANALYSIS
+  python3 -m venv "$ANALYSIS"
   
   # Install libraries and ipykernel
-  source $ANALYSIS/bin/activate
+  source "$ANALYSIS/bin/activate"
   pip install wheel ipython numpy pandas polars matplotlib \
     scikit-learn scipy ipykernel radian --quiet
   python3 -m ipykernel install --user --name=analysis  

@@ -6,7 +6,8 @@ fi
 # Add git to prompt
 if [ -f $HOME/.git-prompt.sh ]; then
   . $HOME/.git-prompt.sh
-  PS1='$(__git_ps1 "[%s] ")'"$PS1"
+#  PS1='$(__git_ps1 "[%s] ")'"$PS1" # TODO MAKE IT WORK!!!!
+  PS1='$(__git_ps1 "[%s] ")${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 fi
 
 # Shrink prompt
@@ -34,6 +35,8 @@ alias dot='cd $DOTFILES'
 alias tmp='cd $TMPDIRECTORY'
 alias ghf='cd $GHFOLDER/$GHUSER'
 
+alias chmox='chmod +x'
+
 alias gs_recursive='find . -maxdepth 1 -mindepth 1 -type d -exec sh -c \
   "echo {}; cd {}; git status -sb; echo" \;'
 
@@ -44,29 +47,45 @@ alias analysis='source $HOME/.local/python_venv/analysis/bin/activate'
 # ---------------------- functions ----------------------#
 
 # Create a python virtual environment and install ipython
+# TODO Create venv in separate function
+#      and call function if chose not to load venv from parent folder
+# TODO Put in its own file
 function venv {
   if [ -d ./venv/ ]; then
     source ./venv/bin/activate
+  elif [ -d ../venv/ ]; then
+    read -e -p "Found venv in parent folder. Do you want to load it instead (Y/n) ?" choice
+    if [[ "$choice" == [Yy]*  ]] || [[ "$choice" == '' ]]; then
+      source ../venv/bin/activate
+    fi
   else
-    
-    echo "Creating Python virtual ..."
-    python3 -m venv ./venv/ && \
+    read -e -p "No venv in current or parent folder, do you want to create venv (Y/n)?" choice
+    if [[ "$choice" == [Yy]* ]] || [[ "$choice" == '' ]]; then
+      
+      echo "Creating Python virtual ..."
+      python3 -m venv ./venv/ && \
 
-    echo "Sourcing virtual environment..."
-    source ./venv/bin/activate && \
+      echo "Sourcing virtual environment..."
+      source ./venv/bin/activate && \
 
-    echo "Installing ipython..."
-    pip install ipython --quiet && \
+      echo "Installing ipython..."
+      pip install ipython --quiet && \
 
-    echo "Refreshing shell hash table..."
-    hash -r || \
-      {
-        local error_message="The command failed: "
-        [[ $? -eq 1 ]] && error_message+="'python3 -m venv ./venv/'"
-        [[ $? -eq 2 ]] && error_message+="'source ./venv/bin/activate'"
-        [[ $? -eq 3 ]] && error_message+="'pip install ipython'"
-        [[ $? -eq 5 ]] && error_message+="'hash -r'"
-        echo "$error_message"
+      if [ -f ./requirements.txt ]; then
+        echo "Installing requirements..."
+        pip install -r requirements.txt --quiet
+      fi
+
+      echo "Refreshing shell hash table..."
+      hash -r || \
+        {
+          local error_message="The command failed: "
+          [[ $? -eq 1 ]] && error_message+="'python3 -m venv ./venv/'"
+          [[ $? -eq 2 ]] && error_message+="'source ./venv/bin/activate'"
+          [[ $? -eq 3 ]] && error_message+="'pip install ipython'"
+          [[ $? -eq 5 ]] && error_message+="'hash -r'"
+          echo "$error_message"
       }
+    fi
   fi
 }
