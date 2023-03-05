@@ -90,20 +90,20 @@ nmap <silent> <C-right> :wincmd l<CR>
 "noremap <right> :echoerr "Umm, use l instead"<CR>
 
 " ------------------------ Status line --------------------------
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
+"function! GitBranch()
+"  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+"endfunction
 
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
+"function! StatuslineGit()
+"  let l:branchname = GitBranch()
+"  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+"endfunction
 
 set laststatus=2
 
 set statusline=
-set statusline+=%#PmenuSel#                " Black backgroun
-set statusline+=%{StatuslineGit()}         " Show git branch
+"set statusline+=%#PmenuSel#                " Black backgroun
+"set statusline+=%{StatuslineGit()}         " Show git branch
 set statusline+=%#LineNr#                  " Colored file path
 set statusline+=\ %{expand('%:p:h:t')}/%t  " File name with parent directory
 "set statusline+=\ %f                        " The path relative to current dir
