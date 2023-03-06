@@ -38,6 +38,11 @@ set expandtab " Use spaces instead of tabs
 
 set hlsearch " Highlight words when searched
 
+set ttyfast " Faster scrolling
+
+" start at last place you were editing
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 " ------------------------ Completion ---------------------------
 set wildmenu " Enable auto completion menu
 set wildmode=list:longest " Make wild menu behave like bash
