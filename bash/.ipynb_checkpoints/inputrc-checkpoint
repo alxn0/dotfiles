@@ -1,5 +1,0 @@
-# Include original inputrc
-$include /etc/inputrc
-
-# Case sensitive autocompletion
-set completion-ignore-case On
