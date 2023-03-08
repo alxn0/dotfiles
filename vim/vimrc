@@ -94,6 +94,11 @@ nmap <silent> <C-right> :wincmd l<CR>
 "noremap <left> :echoerr "Umm, use h instead"<CR>
 "noremap <right> :echoerr "Umm, use l instead"<CR>
 
+" -------------------------- Autocmd ----------------------------
+" Remove trailing whitespace (in python for now)
+"#autocmd FileType py autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd BufWritePre *.py :%s/\s\+$//e
+
 " ------------------------ Status line --------------------------
 "function! GitBranch()
 "  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
