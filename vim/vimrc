@@ -59,14 +59,13 @@ let maplocalleader = ','
 " Yank to end of line (behave as D and C)
 nnoremap Y y$
 
-" Yank to global clipboard (need clipboard, check vim-gtk3)
-if has("clipboard")
-  vnoremap <C-y> "+y
-endif
+" Yank to global clipboard
+vnoremap <leader>y :w !xclip -selection clipboard<Cr><Cr>
+"nnoremap <leader>y :call system('xclip', @0) " SUPPOSE TO SEND LAST YANK... 
 
-" Yank to tmux clipboard
-vnoremap <leader>y y<cr>:call system("tmux load-buffer -", @0)<cr>gv
-nnoremap <leader>p :let @0 = system("tmux save-buffer -")<cr>"0p<cr>g;
+" Yank/paste to/from tmux clipboard
+vnoremap <C-y> y<cr>:call system("tmux load-buffer -", @0)<cr>gv
+nnoremap <C-p> :let @0 = system("tmux save-buffer -")<cr>"0p<cr>g;
 
 " Quit terminal mode
 tnoremap <Esc> <C-\><C-n>
