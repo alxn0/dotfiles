@@ -1,50 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 
-# In case it is not in path
-export PATH="$HOME/.local/bin:$PATH"
+# Symbolic link for pyling
+echo "Create symbolic link for pylint config"
+ln -sf "$PWD/pylintrc" "$HOME/.pylintrc"
 
-# Install venv and pip
-sudo apt install python3-venv -y
-sudo apt install python3-pip -y
-
-# Install some package in global python
-echo "Installing wheel..."; pip install wheel --quiet
-echo "Installing tldr..."; pip install tldr --quiet
-echo "Installing ipython..."; pip install ipython --quiet
-echo "Installing jupyterlab..."; pip install jupyterlab --quiet
- 
-# Create ipython config
+# Create symbolic link for ipython config
 if [ ! -d "$HOME/.ipython/profile_default" ]; then
-  echo "Creating default ipython profile"
-  ipython3 profile create
-fi
-
-echo "Create symbolic links for ipython config"
-ln -sf "$PWD/ipython_config.py" \
-  "$HOME/.ipython/profile_default/ipython_config.py"
-
-# Creating global virtual environments
-VENV_FOLDER="$HOME/.local/python_venv/"
-
-if [ ! -d "$VENV_FOLDER" ]; then
-  mkdir "$VENV_FOLDER"
-fi
-
-## Analysis
-ANALYSIS="$VENV_FOLDER/analysis"
-
-if [ ! -d "$ANALYSIS" ]; then
-  
-  # Creating venv
-  echo "Creating analysis venv"
-  python3 -m venv "$ANALYSIS"
-  
-  # Install libraries and ipykernel
-  source "$ANALYSIS/bin/activate"
-  pip install wheel ipython numpy pandas polars matplotlib \
-    scikit-learn scipy ipykernel radian --quiet
-  python3 -m ipykernel install --user --name=analysis  
-  deactivate
-
+  echo "No ipython default config, run install-python!"
+else
+  echo "Create symbolic links for ipython config"
+  ln -sf "$PWD/ipython_config.py" \
+    "$HOME/.ipython/profile_default/ipython_config.py"
 fi
 
