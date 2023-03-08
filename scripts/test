@@ -1,2 +1,0 @@
-#!/bin/bash
-exec echo "this is my func"
