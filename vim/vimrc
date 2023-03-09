@@ -157,7 +157,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
   " ALE
   let b:ale_linters = {
-        \ 'python': ['pyflakes', 'pylint'],
+        \ 'python': ['pyflakes'],
         \ 'R': ['lintr'],
         \}
 
