@@ -45,10 +45,6 @@ then
   echo -e "\n-- Installing fonts"
   "$PWD/install/install-fonts"
 
-  # Install signal
-  echo -e "\n-- Installing signal"
-  "$PWD/install/install-signal"
-  
   # Manual installation
   echo -e "\n-- Done executing setup scripts"
   echo "Still need to manually install some application"
