@@ -15,11 +15,15 @@ sudo apt update
 sudo apt upgrade  -y
 
 echo -e "\n-- Installing various app from debian package manager"
-sudo apt install vim tmux tree fzf shellcheck -qq
+sudo apt install vim tmux tree shellcheck podman -qq
 
 # Install install github CLI
 echo -e "\n-- Installing gh"
 "$PWD/install/install-gh"
+
+# install python
+echo -e "\n-- Installing Python"
+"$PWD/install/install-python"
 
 # Install R
 echo -e "\n-- Installing R"
@@ -41,6 +45,10 @@ then
   echo -e "\n-- Installing fonts"
   "$PWD/install/install-fonts"
 
+  # Install signal
+  echo -e "\n-- Installing signal"
+  "$PWD/install/install-signal"
+  
   # Manual installation
   echo -e "\n-- Done executing setup scripts"
   echo "Still need to manually install some application"

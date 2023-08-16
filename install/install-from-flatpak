@@ -12,3 +12,4 @@ flatpak install org.videolan.VLC -y
 flatpak install org.qbittorrent.qBittorrent -y
 flatpak install com.brave.Browser -y
 flatpak install org.kryogenix.Pick -y
+flatpak install io.podman_desktop.PodmanDesktop -y
