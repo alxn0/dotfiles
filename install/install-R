@@ -29,8 +29,11 @@ sudo apt install r-base-dev -y
 # Add binaries repository
 sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+ -y
 
-# Install radian
-pip install radian --quiet
+# Install radian (if python's installed)
+if command -v "pip" &> dev/null
+then
+  pip install radian --quiet
+fi
 
 # Create/Change local lib path
 output=$(Rscript --vanilla -e "version = R.version; print(paste('R', version\$major, version\$minor, sep='.'))")
