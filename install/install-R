@@ -47,9 +47,5 @@ if [ ! -d "$libpath" ];then
   echo "R_LIBS_USER=$libpath" > "$HOME/.Renviron"
 fi
 
-# install lintr
-echo "Installing lintr"
-Rscript --vanilla -e "install.packages('lintr', lib='$libpath', repos='https://cloud.r-project.org')"
-
 # Install ipython R kernel
 sudo apt install r-cran-irkernel -qq
