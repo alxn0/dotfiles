@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # NOTE: These instructions only work for 64 bit Debian-based
 # Linux distributions such as Ubuntu, Mint etc.
 

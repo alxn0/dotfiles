@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # In case ~/.local/bin not in path
 if [[ ! :$PATH: == *:"$HOME/.local/bin:$PATH":* ]] ; then

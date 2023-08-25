@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Install vim-plug (Download plug.vim and put it in autoload directory)
 if [ -f ~/.vim/autoload/plug.vim ];
 then
