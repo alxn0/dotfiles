@@ -2,46 +2,108 @@
 " note: design for VIM 8+
 
 " ------------------- General options --------------------------------
-set nocompatible " Disable compatibility with vi
-set nobackup " Do not save backup file
-set splitright " Vertical split on the right
+set nocompatible    " Disable compatibility with vi
+set nobackup        " Do not save backup file
+set splitright      " Vertical split on the right
 set background=dark " Fix different colors in tmux....
 set modifiable      " Make a buffer modifiable...
+set history=100     " Command history
 
-" -------------------  General Editor options -------------------------
+" ------------------- Editor options -------------------------
 filetype on " Enable filetype detection
 filetype plugin on " Load plugins for detected filetype
 filetype indent on " Load indent file by filetype
 
-set number " Add numbered lined
-
 " Use a line cursor within insert mode and a block cursor everywhere else.
 "
 " Reference chart of values:
-"   Ps = 0  -> blinking block.
-"   Ps = 1  -> blinking block (default).
-"   Ps = 2  -> steady block.
-"   Ps = 3  -> blinking underline.
-"   Ps = 4  -> steady underline.
-"   Ps = 5  -> blinking bar (xterm).
-"   Ps = 6  -> steady bar (xterm).
+"  Ps = 0  -> blinking block.
+"  Ps = 1  -> blinking block (default).
+"  Ps = 2  -> steady block.
+"  Ps = 3  -> blinking underline.
+"  Ps = 4  -> steady underline.
+"  Ps = 5  -> blinking bar (xterm).
+"  Ps = 6  -> steady bar (xterm).
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 
-" Set colored vertical lines and define color
-set colorcolumn=80 " Set colored vertical lines
+" numbered lined
+set nonumber
+
+" Set textwidth and colored vertical lines
+set textwidth=72
+set colorcolumn= " Set colored vertical lines (Toggle with F2 at 80)
 highlight ColorColumn ctermbg=8
 
-set shiftwidth=2 " Autoindent width
+" Set special key (mainly listchars) colors
+highlight SpecialKey ctermfg=8
+
+" Indentation
+set smartindent "Auto indent in a 'smart' way
+set autoindent "automatically indent new lines
+set shiftwidth=2 " Autoindent width (>> in normal mode)
 set tabstop=2 " Tab width
 set expandtab " Use spaces instead of tabs
 
-set hlsearch " Highlight words when searched
+" Search
+set hlsearch  " Highlight words when searched
+set incsearch " Highlight incrementally as they are found
+nohl          " Avoir highlighting last search when sourcing .vimrc 
 
+" Scrolling
 set ttyfast " Faster scrolling
 
 " start at last place you were editing
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Prevent truncated yanks, deletes, etc.
+set viminfo='20,<1000,s1000
+
+" Wrap lines
+set wrap
+
+" Don't break words when soft wrapping lines according to the current
+" windows. Note: Soft break don't add <EOL> 
+set linebreak
+
+" Some stuff in vim 8
+if v:version >= 800
+  set nofixendofline " Don't automatically add <EOF> when missing
+
+  " More useful list characters
+  set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
+
+  set foldmethod=manual " Create fold manualy
+  set nofoldenable      " Unfold everything
+endif
+
+
+" ------------------------ Formating when editing -----------------------
+
+" Default formating, this can be changed for specific file type by plugin
+" Most of these are skipped when wrap if off (i.e., set nowrap)
+set fo-=t " Don't auto-wrap text using textwidth
+set fo+=c " Auto-wrap comment using textwidth and insert comment leader
+set fo+=r " Automatically insert comment leader after <Enter> (insert mode)
+set fo-=o " Don't auto insert comment leader following o/O
+set fo+=q " Formating comments with gq
+set fo-=w " Don't indicate paragraph with trailing whitespaces
+set fo-=a " Don't automatically format paragraph 
+set fo-=n " Don't recognized numbered list
+set fo-=2 " Don't use the indent of the second line of a paragraph
+set fo-=v " Don't use vi-compatible auto-wrapping
+set fo-=b " Don't use vi-compatible auto-wrapping
+set fo+=l " Long lines are not broken in insert mode
+set fo-=m " Don't break multibyte character above 255
+set fo+=M " Don't add spaces between multibyte character when joining lines
+set fo+=1 " Don't break line after a one-letter word
+set fo+=j " When it make sense, remove comment leader when joining lines
+set fo+=p " Don't break lines at single spaces that follow periods (prose...)
+
+" --------------------- Formating on save or exit ---------------------------
+
+" Remove trailing whitespace in python when save
+autocmd BufWritePre *.py :%s/\s\+$//e
 
 " ------------------------ Completion ---------------------------
 set wildmenu " Enable auto completion menu
@@ -87,18 +149,33 @@ nmap <silent> <C-up> :wincmd k<CR>
 nmap <silent> <C-left> :wincmd h<CR>
 nmap <silent> <C-right> :wincmd l<CR>
 
-" Disable arrow keys for muscle memory
-"noremap <up> :echoerr "Umm, use k instead"<CR>
-"noremap <down> :echoerr "Umm, use j instead"<CR>
-"noremap <left> :echoerr "Umm, use h instead"<CR>
-"noremap <right> :echoerr "Umm, use l instead"<CR>
+"" Function keys
+map <F1> :set number!<CR>
+nnoremap <F2> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
+map <F3> :set list!<CR>
+map <F4> :set spell!<CR>
+map <F5> :set paste!<CR>
 
-" -------------------------- Autocmd ----------------------------
-" Remove trailing whitespace (in python for now)
-"#autocmd FileType py autocmd BufWritePre <buffer> %s/\s\+$//e
-autocmd BufWritePre *.py :%s/\s\+$//e
+" Disable arrow keys for muscle memory
+noremap <up> :echoerr "Umm, use k instead"<CR>
+noremap <down> :echoerr "Umm, use j instead"<CR>
+noremap <left> :echoerr "Umm, use h instead"<CR>
+noremap <right> :echoerr "Umm, use l instead"<CR>
+
+" Extreme mode!!!!
+" inoremap <up> <NOP>
+" inoremap <down> <NOP>
+" inoremap <left> <NOP>
+" inoremap <right> <NOP>
+
+" Navigate display lines in markdown, pandoc (coherent with auto-wrap)
+au FileType markdown, pandoc noremap j gj
+au FileType markdown, pandoc noremap k gk
 
 " ------------------------ Status line --------------------------
+"  TODO Change to ruler!!!
+"  See set ruf
+
 "function! GitBranch()
 "  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 "endfunction
@@ -158,7 +235,12 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " ALE
   let b:ale_linters = {
         \ 'python': ['pyflakes'],
-        \ 'R': ['lintr'],
+        \}
+  
+  "" Stop annoying R lintr 
+  let g:ale_pattern_options = {
+        \ '.*\.(r)$': {'ale_enabled': 0},
+        \ '.*\.(R)$': {'ale_enabled': 0},
         \}
 
   let g:ale_sign_error = '>>'
@@ -172,3 +254,4 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 endif
+
