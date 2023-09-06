@@ -41,13 +41,10 @@ export CDPATH=".:$GHFOLDER/$GHUSER:$GHFOLDER"
 alias ipython='ipython3'
 alias python='python3'
 alias vi='vim'
-
-alias dot='cd $DOTFILES'
-alias tmp='cd $TMPDIRECTORY'
-alias ghf='cd $GHFOLDER/$GHUSER'
-alias scripts='cd $SCRIPTS'
-
+alias \?='duck'
+alias \?\?='sgpt'
 alias chmox='chmod +x'
+alias tmp="cd $TMPDIRECTORY"
 
 alias gs_recursive='find . -maxdepth 1 -mindepth 1 -type d -exec sh -c \
   "echo {}; cd {}; git status -sb; echo" \;'
@@ -58,6 +55,8 @@ alias gf_recursive='find . -maxdepth 1 -mindepth 1 -type d -exec sh -c \
 alias analysis='source $HOME/.local/python_venv/analysis/bin/activate'
 
 alias now='date "+%Y%m%d%H%M%S"'
+
+alias copy='xclip -selection clipboard'
 
 # ------------------------ Functions ------------------- #
 # Create a python virtual environment and install ipython
