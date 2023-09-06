@@ -83,7 +83,7 @@ endif
 " Default formating, this can be changed for specific file type by plugin
 " Most of these are skipped when wrap if off (i.e., set nowrap)
 set fo-=t " Don't auto-wrap text using textwidth
-set fo+=c " Auto-wrap comment using textwidth and insert comment leader
+set fo-=c " Auto-wrap comment using textwidth and insert comment leader
 set fo+=r " Automatically insert comment leader after <Enter> (insert mode)
 set fo-=o " Don't auto insert comment leader following o/O
 set fo+=q " Formating comments with gq
