@@ -168,9 +168,9 @@ noremap <right> :echoerr "Umm, use l instead"<CR>
 " inoremap <left> <NOP>
 " inoremap <right> <NOP>
 
-" Navigate display lines in markdown, pandoc (coherent with auto-wrap)
-au FileType markdown, pandoc noremap j gj
-au FileType markdown, pandoc noremap k gk
+" Navigate between display lines in markdown 
+au FileType markdown noremap j gj
+au FileType markdown noremap k gk
 
 " ------------------------ Status line --------------------------
 "  TODO Change to ruler!!!
@@ -220,8 +220,8 @@ set statusline+=\ %4p%%                    " File percent
 if filereadable(expand('~/.vim/autoload/plug.vim'))
   
   call plug#begin()
-  Plug 'jpalardy/vim-slime' " REPL for vim
-  Plug 'dense-analysis/ale' " Asychronous Lint Engine
+  Plug 'jpalardy/vim-slime'     " REPL for vim
+  Plug 'dense-analysis/ale'     " Asychronous Lint Engine
   call plug#end()
 
   " vim-slime
