@@ -15,7 +15,7 @@ sudo apt update
 sudo apt upgrade  -y
 
 echo -e "\n-- Installing various app from debian package manager"
-sudo apt install vim tmux tree shellcheck podman -qq
+sudo apt install vim tmux tree shellcheck podman lynx -qq
 
 # Install install github CLI
 echo -e "\n-- Installing gh"
