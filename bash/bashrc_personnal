@@ -31,8 +31,11 @@ export EDITOR=vim
 export GHFOLDER="$HOME/GitHub"
 export GHUSER="alex-naud"
 export DOTFILES="$GHFOLDER/$GHUSER/dotfiles"
-export TMPDIRECTORY="$HOME/.tmp"
+export TMPDIRECTORY="$HOME/tmp"
 export SCRIPTS="$HOME/Scripts"
+
+# -------------- cdpath -------------------------------#
+export CDPATH=".:$GHFOLDER/$GHUSER:$GHFOLDER"
 
 # --------------------- alias ------------------------- #
 alias ipython='ipython3'
