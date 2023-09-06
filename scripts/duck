@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# With ddgr
+#export BROWSER=w3m
+#exec ddgr "$*"
+
+# Directly in text-based browser
+# exec w3m "duckduckgo.com/lite?q=$*" # 🦆
+exec lynx "duckduckgo.com/lite?q=$*" # 🦆
+
