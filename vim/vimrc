@@ -237,14 +237,16 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " ALE
   " Use shellcheck by default for bash/sh
   let b:ale_linters = {
-        \ 'python': ['pyflakes']
+        \ 'python': ['pyflakes'],
+        \ 'r':['lintr']
         \}
   
   "" Stop annoying R lintr 
-  let g:ale_pattern_options = {
-        \ '.*\.r$': {'ale_enabled': 0},
-        \ '.*\.R$': {'ale_enabled': 0}
-        \}
+  "let g:ale_pattern_options = {
+  "      \ '.*\.r$': {'ale_enabled': 0},
+  "      \ '.*\.R$': {'ale_enabled': 0}
+  "      \}
+  autocmd FileType r ALEToggle
 
   let g:ale_sign_error = '>>'
   let g:ale_sign_warning = '--'
