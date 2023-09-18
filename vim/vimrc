@@ -102,8 +102,10 @@ set fo+=p " Don't break lines at single spaces that follow periods (prose...)
 
 " --------------------- Formating on save or exit ---------------------------
 
-" Remove trailing whitespace in python when save
+" Remove trailing whitespace in python and R when save
 autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre *.R :%s/\s\+$//e
+autocmd BufWritePre *.r :%s/\s\+$//e
 
 " ------------------------ Completion ---------------------------
 set wildmenu " Enable auto completion menu
