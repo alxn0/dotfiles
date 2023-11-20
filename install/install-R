@@ -27,7 +27,9 @@ sudo apt install --no-install-recommends r-base -y
 sudo apt install r-base-dev -y
 
 # Add binaries repository
-sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+ -y
+# Commented because I don't want to update package with 
+# apt update (no "working" venv in R)
+# sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+ -y
 
 # Install radian (if python's installed)
 if command -v "pip" &> dev/null
@@ -36,16 +38,16 @@ then
 fi
 
 # Create/Change local lib path
-output=$(Rscript --vanilla -e "version = R.version; print(paste('R', version\$major, version\$minor, sep='.'))")
-version=$(sed 's/\[1\] \"\(.*\)\"/\1/' <(echo "$output"))
-libpath="$HOME/.local/lib/$version"
+#output=$(Rscript --vanilla -e "version = R.version; print(paste('R', version\$major, version\$minor, sep='.'))")
+#version=$(sed 's/\[1\] \"\(.*\)\"/\1/' <(echo "$output"))
+#libpath="$HOME/.local/lib/$version"
 
-if [ ! -d "$libpath" ];then
-  echo "Creating $libpath"
-  mkdir "$libpath"
-  echo "Modify ~/.Renviron"
-  echo "R_LIBS_USER=$libpath" > "$HOME/.Renviron"
-fi
+#if [ ! -d "$libpath" ];then
+#  echo "Creating $libpath"
+#  mkdir "$libpath"
+#  echo "Modify ~/.Renviron"
+#  echo "R_LIBS_USER=$libpath" > "$HOME/.Renviron"
+#fi
 
 # Install ipython R kernel
 sudo apt install r-cran-irkernel -qq
