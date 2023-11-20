@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Terminal emulator 
+echo -e "\n-- installing Alacritty"
+sudo apt install alacritty -y
+cd alacritty && ./setup
+cd ..
+
+# Text web browser
+echo -e "\n-- installing Lynx"
+sudo apt install lynx -y
+cd lynx && ./setup
+cd ..
+
+# Install from flatpak
+echo -e "\n-- Installing various app from flatpak"
+flatpak install org.zotero.Zotero -y
+flatpak install org.inkscape.Inkscape -y
+flatpak install org.gimp.GIMP -y
+flatpak install org.keepassxc.KeePassXC -y
+flatpak install com.slack.Slack -y
+flatpak install org.signal.Signal -y
+flatpak install org.videolan.VLC -y
+flatpak install org.qbittorrent.qBittorrent -y
+flatpak install com.brave.Browser -y
+flatpak install org.kryogenix.Pick -y
+flatpak install org.gottcode.Kapow -y
+
+# Install Kapow punch clock
+#echo -e "\n-- Installing Kapow"
+#"$PWD/install/install-kapow"
+
+# Install fonts
+echo -e "\n-- Installing fonts"
+"$PWD/install/install-fonts"
+
+# Link personnal scripts
+echo "Symlink scripts"
+ln -sf "$PWD/scripts" "$HOME/Scripts"

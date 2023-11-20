@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Updating repository and upgrading system 
+echo -e "\n-- Update and upgrade" 
+sudo apt update
+sudo apt upgrade  -y
+
+echo -e "\n-- Installing various app from debian package manager"
+sudo apt install vim tmux tree shellcheck podman -qq
+
+# Install install github CLI
+echo -e "\n-- Installing gh"
+if [ "$(which gh)" != ""]; then
+  "$PWD/install/install-gh"
+fi
+
+# install and config python
+echo -e "\n-- Installing Python"
+"$PWD/install/install-python"
+
+# Install R
+echo -e "\n-- Installing R"
+"$PWD/install/install-R"
+
+# Configs
+for i in bash git vim tmux python;
+do
+  echo "Setup $i"
+  cd $i && ./setup
+  cd ..
+done
+
+
+
+
+
