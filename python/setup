@@ -1,15 +1,55 @@
 #!/bin/bash
 
-# Symbolic link for pyling
-echo "Create symbolic link for pylint config"
-ln -sf "$PWD/pylintrc" "$HOME/.pylintrc"
-
-# Create symbolic link for ipython config
-if [ ! -d "$HOME/.ipython/profile_default" ]; then
-  echo "No ipython default config, run install-python!"
-else
-  echo "Create symbolic links for ipython config"
-  ln -sf "$PWD/ipython_config.py" \
-    "$HOME/.ipython/profile_default/ipython_config.py"
+# In case ~/.local/bin not in path
+if [[ ! :$PATH: == *:"$HOME/.local/bin:$PATH":* ]] ; then
+   export PATH="$HOME/.local/bin:$PATH"   
 fi
 
+# Install python, venv and pip
+sudo apt install python3-venv pipx -y
+
+# Install some package system wide
+#echo "Installing wheel..." 
+#sudo apt install python3-wheel -y
+
+echo "Installing ipython..." # For radian
+sudo apt install python3-ipython -y
+
+echo "Installing jupyterlab..."
+pipx install jupyterlab
+
+# Create ipython config
+if [ ! -d "$HOME/.ipython/profile_default" ]; then
+  echo "Creating default ipython profile"
+  ipython3 profile create
+fi
+
+echo "Create symbolic links for ipython config"
+ln -sf "$PWD/ipython_config.py" \
+  "$HOME/.ipython/profile_default/ipython_config.py"
+
+# Creating global virtual environments
+VENV_FOLDER="$HOME/.local/python_venv/"
+
+if [ ! -d "$VENV_FOLDER" ]; then
+  mkdir "$VENV_FOLDER"
+fi
+
+# Create a virtual environment for analysis
+# Avoid colliding with ubuntu python install
+ANALYSIS="$VENV_FOLDER/analysis"
+
+if [ ! -d "$ANALYSIS" ]; then
+  
+  # Creating venv
+  echo "Creating analysis venv"
+  python3 -m venv "$ANALYSIS"
+  
+  # Install libraries and ipykernel
+  source "$ANALYSIS/bin/activate"
+  pip install wheel ipython numpy pandas polars matplotlib \
+    scikit-learn scipy ipykernel --quiet
+  python3 -m ipykernel install --user --name=analysis  
+  deactivate
+
+fi
