@@ -31,6 +31,9 @@ go install github.com/charmbracelet/mods@latest
 go install github.com/rwxrob/pomo/cmd/pomo@latest
 complete -C pomo pomo
 
+# Tldr
+pipx install tldr
+
 # Configs
 for i in bash git vim tmux python;
 do
