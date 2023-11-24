@@ -26,10 +26,6 @@ flatpak install com.brave.Browser -y
 flatpak install org.kryogenix.Pick -y
 flatpak install org.gottcode.Kapow -y
 
-# Install Kapow punch clock
-#echo -e "\n-- Installing Kapow"
-#"$PWD/install/install-kapow"
-
 # Install fonts
 echo -e "\n-- Installing fonts"
 "$PWD/install/install-fonts"

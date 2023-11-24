@@ -1,6 +1,0 @@
-#!/bin/bash
-
-sudo add-apt-repository ppa:gottcode/gcppa
-sudo apt update
-sudo apt install kapow
-sudo apt install qt6-base-dev # Dependancy
