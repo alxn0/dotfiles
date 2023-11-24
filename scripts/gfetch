@@ -1,0 +1,5 @@
+#!/bin/bash
+# Git fetch recursively in child folders
+exec find . -maxdepth 1 -mindepth 1 -type d -exec sh -c \
+  "echo {}; cd {}; git fetch; echo" \;
+

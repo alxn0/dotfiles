@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Run git status recursively on all subfolder within
+# the current (.) folder
+exec find . -maxdepth 1 -mindepth 1 -type d -exec sh -c \
+  "echo {}; cd {}; git status -sb; echo" \;
+
