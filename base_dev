@@ -22,6 +22,15 @@ echo -e "\n-- Installing Python"
 echo -e "\n-- Installing R"
 "$PWD/install/install-R"
 
+# Install go
+echo -e "\n-- Installing go"
+"$PWD/install/install-go"
+
+# Install go binaries
+go install github.com/charmbracelet/mods@latest
+go install github.com/rwxrob/pomo/cmd/pomo@latest
+complete -C pomo pomo
+
 # Configs
 for i in bash git vim tmux python;
 do
