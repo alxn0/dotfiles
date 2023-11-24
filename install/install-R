@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Tell Ubunte about the binaries at CRAN
-
 ## update indices
 sudo apt update -qq
 
@@ -25,11 +23,6 @@ fi
 # Install R
 sudo apt install --no-install-recommends r-base -y
 sudo apt install r-base-dev -y
-
-# Add binaries repository
-# Commented because I don't want to update package with 
-# apt update (no "working" venv in R)
-# sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+ -y
 
 # Install radian (if python's installed)
 if command -v "pipx" &> dev/null
