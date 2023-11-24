@@ -30,17 +30,5 @@ then
   pipx install radian --quiet
 fi
 
-# Create/Change local lib path
-#output=$(Rscript --vanilla -e "version = R.version; print(paste('R', version\$major, version\$minor, sep='.'))")
-#version=$(sed 's/\[1\] \"\(.*\)\"/\1/' <(echo "$output"))
-#libpath="$HOME/.local/lib/$version"
-
-#if [ ! -d "$libpath" ];then
-#  echo "Creating $libpath"
-#  mkdir "$libpath"
-#  echo "Modify ~/.Renviron"
-#  echo "R_LIBS_USER=$libpath" > "$HOME/.Renviron"
-#fi
-
 # Install ipython R kernel
 sudo apt install r-cran-irkernel -qq
