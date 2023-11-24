@@ -32,9 +32,9 @@ sudo apt install r-base-dev -y
 # sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+ -y
 
 # Install radian (if python's installed)
-if command -v "pip" &> dev/null
+if command -v "pipx" &> dev/null
 then
-  pip install radian --quiet
+  pipx install radian --quiet
 fi
 
 # Create/Change local lib path
