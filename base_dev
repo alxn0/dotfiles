@@ -8,9 +8,9 @@ sudo apt upgrade  -y
 echo -e "\n-- Installing various app from debian package manager"
 sudo apt install vim tmux entr tree xclip shellcheck podman -qq
 
-# Install install github CLI
+# Install github CLI
 echo -e "\n-- Installing gh"
-if [ "$(which gh)" != ""]; then
+if [ "$(which gh)" != "" ]; then
   "$PWD/install/install-gh"
 fi
 
@@ -38,8 +38,3 @@ do
   cd $i && ./setup
   cd ..
 done
-
-
-
-
-
