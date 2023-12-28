@@ -6,7 +6,7 @@ sudo apt update
 sudo apt upgrade  -y
 
 echo -e "\n-- Installing various app from debian package manager"
-sudo apt install vim tmux entr tree xclip shellcheck podman -qq
+sudo apt install vim tmux entr tree xclip shellcheck ripgrep podman -qq
 
 # Install github CLI
 echo -e "\n-- Installing gh"
