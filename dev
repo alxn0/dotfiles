@@ -26,6 +26,10 @@ echo -e "\n-- Installing R"
 echo -e "\n-- Installing go"
 "$PWD/install/install-go"
 
+# Install cht
+echo -e "\n-- Installing cht.sh CLI client"
+"$PWD/install/install-cht"
+
 # Install go binaries
 go install github.com/charmbracelet/mods@latest
 go install github.com/rwxrob/pomo/cmd/pomo@latest
