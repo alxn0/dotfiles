@@ -120,7 +120,9 @@ font:
     #family: BlexMono Nerd Font Mono 
     #family: SauceCodePro Nerd Font Mono 
     #family: FuraMono Nerd Font Mono
-    family: Hack Nerd Font
+    #family: Hack Nerd Font
+    family: Berkeley Mono
+    #family: Berkeley Mono Variable
     #family: JetBrainsMono Nerd Font Mono
     #family: UbuntuMono Nerd Font 
 
