@@ -29,7 +29,10 @@ echo -e "\n-- Installing go"
 # Install go binaries
 go install github.com/charmbracelet/mods@latest
 go install github.com/rwxrob/pomo/cmd/pomo@latest
+go install github.com/rwxrob/keg/cmd/keg@latest
+
 complete -C pomo pomo
+complete -C keg keg
 
 # Tldr
 pipx install tldr

@@ -107,6 +107,11 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 autocmd BufWritePre *.R :%s/\s\+$//e
 autocmd BufWritePre *.r :%s/\s\+$//e
 
+" ----------------------- File format ----------------------------------
+
+" Read keg as yaml
+au bufnewfile,bufRead keg set ft=yaml
+
 " ------------------------ Completion ---------------------------
 set wildmenu " Enable auto completion menu
 set wildmode=list:longest " Make wild menu behave like bash

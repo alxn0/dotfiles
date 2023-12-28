@@ -1,0 +1,3 @@
+#!/bin/sh
+export KEG_CURRENT="$HOME/GitHub/alex-naud/zet/docs"
+exec keg "$@"
