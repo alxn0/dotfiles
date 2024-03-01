@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Check if jq is installed
+if ! command -v jq >/dev/null 2>&1; then
+  echo "Please install jq to use this script."
+  exit 1
+fi
+
+# Set the path to the API key file
+API_KEY_FILE="$HOME/.config/dalle"
+
+# Check if the API key file exists
+if [[ ! -f "$API_KEY_FILE" ]]; then
+  echo "API key file does not exist: $API_KEY_FILE"
+  exit 1
+fi
+
+# Read the API key from the file (assumes there is only one line in the
+# file
+API_KEY=$(cat "$API_KEY_FILE")
+
+# Check if the API key variable is empty
+if [[ -z "$API_KEY" ]]; then
+  echo "API key is empty. Please check the contents of the file."
+  exit 1
+fi
+
+# Send a cURL request to the dalle REST API 
+response=$(curl https://api.openai.com/v1/images/generations \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $API_KEY" \
+  -d "{
+    \"model\": \"dall-e-3\",
+    \"prompt\": \"$*\",
+    \"n\": 1,
+    \"size\": \"1024x1024\"
+  }")
+
+# Check if the cURL request was successful
+if [[ $? -ne 0 ]]; then
+  echo "Failed to make a request to the API."
+  exit 1
+fi
+
+# Print response
+echo "$response"
+
+# Parse url and revised prompt
+url=$(echo "$response" | jq -r '.data[]' | jq '.url' | sed s/\"//g)
+
+# Validate that the URL was successfully extracted
+if [[ -z "$url" ]]; then
+  echo "Failed to extract URL from the JSON response."
+  exit 1
+fi
+
+# Open the URL in the default web browser
+xdg-open "$url"
+
