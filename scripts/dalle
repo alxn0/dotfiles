@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# TODO: 
+# Add options to save response and image to current folder
+# Add silent option
+# Add option to load or not image from default browser
+
 # Check if jq is installed
 if ! command -v jq >/dev/null 2>&1; then
   echo "Please install jq to use this script."
@@ -42,11 +47,13 @@ if [[ $? -ne 0 ]]; then
   exit 1
 fi
 
-# Print response
-echo "$response"
-
-# Parse url and revised prompt
+# Parse url and create time 
 url=$(echo "$response" | jq -r '.data[]' | jq '.url' | sed s/\"//g)
+#created=$(echo "$response" | jq -r '.created')
+
+# Write response to file
+#echo $response > "dalle_$created" 
+echo "$response"
 
 # Validate that the URL was successfully extracted
 if [[ -z "$url" ]]; then
@@ -54,6 +61,5 @@ if [[ -z "$url" ]]; then
   exit 1
 fi
 
-# Open the URL in the default web browser
 xdg-open "$url"
 
