@@ -130,10 +130,11 @@ alias la='ls -A'
 alias l='ls -CF'
 alias ipython='ipython3'
 alias python='python3'
-alias vi='vim'
+alias bat=batcat
+alias analysis='source $HOME/.local/python_venv/analysis/bin/activate'
 alias \?='duck'
 alias chmox='chmod +x'
-alias tmp="cd $TMPDIRECTORY"
+alias tmp='cd $TMPDIRECTORY'
 
 # -------------------- Auto completion ---------------------------- #
 # enable programmable completion features (you don't need to enable
