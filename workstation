@@ -24,7 +24,6 @@ flatpak install org.videolan.VLC -y
 flatpak install org.qbittorrent.qBittorrent -y
 flatpak install com.brave.Browser -y
 flatpak install org.kryogenix.Pick -y
-flatpak install org.gottcode.Kapow -y
 
 # Install fonts
 echo -e "\n-- Installing fonts"
