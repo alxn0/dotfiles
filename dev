@@ -6,7 +6,7 @@ sudo apt update
 sudo apt upgrade  -y
 
 echo -e "\n-- Installing various app from debian package manager"
-sudo apt install vim tmux entr tree xclip shellcheck ripgrep podman -qq
+sudo apt install vim tmux entr tree xclip shellcheck ripgrep batcat -qq
 
 # Install github CLI
 echo -e "\n-- Installing gh"
@@ -32,14 +32,11 @@ echo -e "\n-- Installing cht.sh CLI client"
 
 # Install go binaries
 go install github.com/charmbracelet/mods@latest
-go install github.com/rwxrob/pomo/cmd/pomo@latest
-go install github.com/rwxrob/keg/cmd/keg@latest
+go install github.com/stefanlogue/meteor@latest
 
-complete -C pomo pomo
-complete -C keg keg
-
-# Tldr
+# Python global utilities
 pipx install tldr
+pipx install td-watson
 
 # Configs
 for i in bash git vim tmux python;
