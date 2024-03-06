@@ -8,10 +8,6 @@ fi
 # Install python, venv and pip
 sudo apt install python3-venv pipx -y
 
-# Install some package system wide
-#echo "Installing wheel..." 
-#sudo apt install python3-wheel -y
-
 echo "Installing ipython..." # For radian
 sudo apt install python3-ipython -y
 
@@ -28,28 +24,3 @@ echo "Create symbolic links for ipython config"
 ln -sf "$PWD/ipython_config.py" \
   "$HOME/.ipython/profile_default/ipython_config.py"
 
-# Creating global virtual environments
-VENV_FOLDER="$HOME/.local/python_venv/"
-
-if [ ! -d "$VENV_FOLDER" ]; then
-  mkdir "$VENV_FOLDER"
-fi
-
-# Create a virtual environment for analysis
-# Avoid colliding with ubuntu python install
-ANALYSIS="$VENV_FOLDER/analysis"
-
-if [ ! -d "$ANALYSIS" ]; then
-  
-  # Creating venv
-  echo "Creating analysis venv"
-  python3 -m venv "$ANALYSIS"
-  
-  # Install libraries and ipykernel
-  source "$ANALYSIS/bin/activate"
-  pip install wheel ipython numpy pandas polars matplotlib \
-    scikit-learn scipy ipykernel --quiet
-  python3 -m ipykernel install --user --name=analysis  
-  deactivate
-
-fi

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Creating global virtual environments
+VENV_FOLDER="$HOME/.local/python_venv/"
+
+if [ ! -d "$VENV_FOLDER" ]; then
+  mkdir "$VENV_FOLDER"
+fi
+
+# Create a virtual environment for analysis
+# Avoid colliding with ubuntu python install
+ANALYSIS="$VENV_FOLDER/analysis"
+
+if [ ! -d "$ANALYSIS" ]; then
+
+  # Creating and activating venv
+  echo "Creating analysis venv"
+  python3 -m venv "$ANALYSIS"
+  source "$ANALYSIS/bin/activate"
+
+  # Install librarities and ipykernel
+  pip install wheel ipython numpy pandas polars matplotlib \
+    scikit-learn scipy ipykernel --quiet
+  python3 -m ipykernel install --user --name=analysis
+
+  # Quit venv
+  deactivate
+
+fi
+
