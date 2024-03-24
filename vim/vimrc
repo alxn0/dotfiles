@@ -229,6 +229,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   call plug#begin()
   Plug 'jpalardy/vim-slime'     " REPL for vim
   Plug 'dense-analysis/ale'     " Asychronous Lint Engine
+  Plug 'github/copilot.vim'     " GitHub copilot
   call plug#end()
 
   " vim-slime
@@ -240,17 +241,13 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   nmap <space> <Plug>SlimeParagraphSend
 
   " ALE
-  " Use shellcheck by default for bash/sh
+  "" Use shellcheck by default for bash/sh
   let b:ale_linters = {
         \ 'python': ['pyflakes'],
         \ 'r':['lintr']
         \}
   
   "" Stop annoying R lintr 
-  "let g:ale_pattern_options = {
-  "      \ '.*\.r$': {'ale_enabled': 0},
-  "      \ '.*\.R$': {'ale_enabled': 0}
-  "      \}
   autocmd FileType r ALEToggle
 
   let g:ale_sign_error = '>>'
@@ -262,6 +259,26 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   "" Navigate between errors  
   nmap <silent> <C-k> <Plug>(ale_previous_wrap)
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+  " Copilot
+  "" Which file type
+  let g:copilot_filetypes = {
+    \ 'gitcommit': v:true,
+    \ 'markdown': v:false,
+    \ 'yaml': v:false,
+    \ 'python': v:true,
+    \ 'r': v:true,
+    \ 'sh': v:true,
+    \ 'vim': v:true
+    \ }
+
+  "" Avoid copilot in file > 100kb
+   autocmd BufReadPre *
+     \ let f=getfsize(expand("<afile>"))
+     \ | if f > 100000 || f == -2
+     \ | let b:copilot_enabled = v:false
+     \ | endif
+ 
 
 endif
 

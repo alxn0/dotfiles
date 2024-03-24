@@ -1,3 +1,3 @@
 #!/bin/sh
-export KEG_CURRENT="$HOME/GitHub/alex-naud/zet/docs"
+export KEG_CURRENT="$HOME/GitHub/alxn0/zet/docs"
 exec keg "$@"
