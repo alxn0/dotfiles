@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Check if a file is provided as an argument
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <markdown-file>"
+  exit 1
+fi
+
+# File to be parsed
+FILE="$1"
+
+# Check if the file exists
+if [ ! -f "$FILE" ]; then
+  echo "Error: File '$FILE' not found."
+  exit 1
+fi
+
+# Function to slugify strings as GitHub would for anchor tags
+slugify() {
+  echo "$1" | tr '[:upper:]' '[:lower:]' | tr -d '\r' | tr -dc '[:alnum:] 
+  \n' | sed 's/ /-/g'
+  }
+
+echo "# Table of Contents"
+
+# Read file and generate table of contents
+while IFS= read -r line; do
+  # Check if the line starts with a markdown header
+  if [[ $line =~ ^\#+\ (.*) ]]; then
+  # Extract the header text without the '#' symbols
+  headerText="${BASH_REMATCH[1]}"
+  headerLevel=$(($(grep -o "#" <<< "$line" | wc -l) - 1))
+  # Slugify header text to form the GitHub anchor link
+  slug=$(slugify "$headerText")
+  # Print the table of contents line with indentation based on header level
+  printf "%*s- [%s](#%s)\n" $((headerLevel * 2)) "" "$headerText" "$slug"
+  fi
+done < "$FILE"
+
+
