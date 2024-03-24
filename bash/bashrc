@@ -105,11 +105,12 @@ export PATH="/usr/local/go/bin:$PATH"
 # ------------- Environment variable ------------------ #
 export EDITOR=vim
 export GHFOLDER="$HOME/GitHub"
-export GHUSER="alex-naud"
+export GHUSER="alxn0"
 export TMPDIRECTORY="$HOME/tmp"
+export PROJECTS="$HOME/Projects"
 
 # -------------- cdpath -------------------------------#
-export CDPATH=".:$GHFOLDER/$GHUSER:$GHFOLDER"
+export CDPATH=".:$GHFOLDER/$GHUSER:$GHFOLDER:$PROJECTS"
 
 # -------------------- Coloured command -------------------------- #
 
