@@ -106,11 +106,12 @@ export PATH="/usr/local/go/bin:$PATH"
 export EDITOR=vim
 export GHFOLDER="$HOME/GitHub"
 export GHUSER="alxn0"
+export GHTEAM="polygonteam"
 export TMPDIRECTORY="$HOME/tmp"
 export PROJECTS="$HOME/Projects"
 
 # -------------- cdpath -------------------------------#
-export CDPATH=".:$GHFOLDER/$GHUSER:$GHFOLDER:$PROJECTS"
+export CDPATH=".:$GHFOLDER/$GHUSER:$GHFOLDER/$GHTEAM:$GHFOLDER:$PROJECTS"
 
 # -------------------- Coloured command -------------------------- #
 
