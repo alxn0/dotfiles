@@ -1,4 +1,3 @@
 #!/bin/sh
-# Current a new node from default folder
-export KEG_CURRENT="$HOME/Documents/Notes/"
-exec keg "$@" create
+export KEG_CURRENT="$HOME/Documents/Notes"
+exec keg "$@"

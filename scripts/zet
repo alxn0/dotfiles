@@ -1,4 +1,3 @@
 #!/bin/sh
-# Current a new node from default folder
 export KEG_CURRENT="$GHFOLDER/$GHUSER/zet/docs"
-exec keg "$@" create
+exec keg "$@"
