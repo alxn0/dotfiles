@@ -5,8 +5,13 @@ if [[ ! :$PATH: == *:"$HOME/.local/bin:$PATH":* ]] ; then
    export PATH="$HOME/.local/bin:$PATH"   
 fi
 
-# Install python, venv and pip
-sudo apt install python3-venv pipx -y
+# Install pipx 
+echo "Installing pipx..." # For radian
+sudo apt install pipx -y
+
+# Install venv
+echo "Installing venv..." # For radian
+sudo apt install python3-venv -y
 
 echo "Installing ipython..." # For radian
 sudo apt install python3-ipython -y
