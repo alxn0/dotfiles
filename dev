@@ -6,17 +6,21 @@ sudo apt update
 sudo apt upgrade  -y
 
 echo -e "\n-- Installing various app from debian package manager"
-sudo apt install vim tmux entr tree xclip shellcheck ripgrep batcat -qq
+sudo apt install vim -y
+sudo apt install tmux -y
+sudo apt install entr -y 
+sudo apt install tree -y
+sudo apt install xclip -y
+sudo apt install shellcheck -y
+sudo apt install ripgrep -y
+sudo apt install batcat -y
+sudo apt install curl -y
 
 # Install github CLI
 echo -e "\n-- Installing gh"
 if [ "$(which gh)" != "" ]; then
   "$PWD/install/install-gh"
 fi
-
-# install and config python
-echo -e "\n-- Installing Python"
-"$PWD/install/install-python"
 
 # Install R
 echo -e "\n-- Installing R"
@@ -35,6 +39,7 @@ go install github.com/charmbracelet/mods@latest
 go install github.com/stefanlogue/meteor@latest
 
 # Python global utilities
+pipx ensurepath
 pipx install tldr
 pipx install td-watson
 
