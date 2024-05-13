@@ -9,4 +9,4 @@ fi
 
 # Creating symbolic link
 echo "Creating symbolic link"
-ln -sf "$PWD/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
+ln -sf "$PWD/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
