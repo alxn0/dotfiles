@@ -14,7 +14,7 @@ echo "Installing venv..." # For radian
 sudo apt install python3-venv -y
 
 echo "Installing ipython..." # For radian
-sudo apt install python3-ipython -y
+pipx install ipython
 
 echo "Installing jupyterlab..."
 pipx install jupyterlab
