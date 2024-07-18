@@ -77,7 +77,6 @@ if v:version >= 800
   set nofoldenable      " Unfold everything
 endif
 
-
 " ------------------------ Formating when editing -----------------------
 
 " Default formating, this can be changed for specific file type by plugin
@@ -148,15 +147,14 @@ nnoremap <leader>re :e ~/.vimrc<CR>
 
 " Open a terminal on the right
 nnoremap <leader>t :vertical botright term<CR>
-nnoremap <leader>t :vertical botright term<CR>
 
-"" Navigation
+" Navigation
 nmap <silent> <C-down> :wincmd j<CR>
 nmap <silent> <C-up> :wincmd k<CR>
 nmap <silent> <C-left> :wincmd h<CR>
 nmap <silent> <C-right> :wincmd l<CR>
 
-"" Function keys
+" Function keys
 map <F1> :set number!<CR>
 nnoremap <F2> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 map <F3> :set list!<CR>
