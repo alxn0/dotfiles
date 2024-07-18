@@ -22,7 +22,6 @@ flatpak install com.slack.Slack -y
 flatpak install org.signal.Signal -y
 flatpak install org.videolan.VLC -y
 flatpak install org.qbittorrent.qBittorrent -y
-flatpak install com.brave.Browser -y
 flatpak install org.kryogenix.Pick -y
 
 # Install fonts
