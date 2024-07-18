@@ -13,13 +13,12 @@ then
   mkdir -p $HOME/.local/share/fonts/opentype
 fi
 
-
 # Install fonts
 echo "Installing truetype fonts..."
-sudo find $DOTFILES/install/fonts -name "*.ttf" -exec cp "{}" ~/.local/share/fonts/truetype/ ";"
+sudo find $PWD/fonts -name "*.ttf" -exec cp "{}" ~/.local/share/fonts/truetype/ ";"
 
 echo "Installing opentype fonts..."
-sudo find $DOTFILES/install/fonts -name "*.otf" -exec cp "{}" ~/.local/share/fonts/opentype/ ";" 
+sudo find $PWD/fonts -name "*.otf" -exec cp "{}" ~/.local/share/fonts/opentype/ ";" 
 
 # Clear and restart cache
 echo "Clear and restart cache...."
