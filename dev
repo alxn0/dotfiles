@@ -28,21 +28,24 @@ done
 cd "$PWD/install"
 
 echo -e "\n-- Installing gh"
-if [ "$(which gh)" != "" ]; then
-  "$PWD/install/install-gh"
-fi
+"$PWD/install-gh"
 
-# Install R
 echo -e "\n-- Installing R"
-"$PWD/install/install-R"
+"$PWD/install-R"
 
-# Install go
 echo -e "\n-- Installing go"
-"$PWD/install/install-go"
+"$PWD/install-go"
 
-# Install cht
 echo -e "\n-- Installing cht.sh CLI client"
-"$PWD/install/install-cht"
+"$PWD/install-cht"
+
+echo -e "\n-- Installing docker"
+"$PWD/install-docker"
+
+echo -e "\n-- Installing miniconda3"
+"$PWD/install-miniconda3"
+
+cd ..
 
 # Install go binaries
 go install github.com/charmbracelet/mods@latest
