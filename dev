@@ -16,7 +16,17 @@ sudo apt install ripgrep -y
 sudo apt install bat -y
 sudo apt install curl -y
 
-# Install github CLI
+# Configs
+for i in bash git vim tmux python;
+do
+  echo "Setup $i"
+  cd $i && ./setup
+  cd ..
+done
+
+# Install stuff
+cd "$PWD/install"
+
 echo -e "\n-- Installing gh"
 if [ "$(which gh)" != "" ]; then
   "$PWD/install/install-gh"
@@ -43,10 +53,7 @@ go install github.com/rwxrob/keg/cmd/keg@latest
 pipx install tldr
 pipx install td-watson
 
-# Configs
-for i in bash git vim tmux python;
-do
-  echo "Setup $i"
-  cd $i && ./setup
-  cd ..
-done
+# Link personnal scripts
+echo "Symlink scripts"
+ln -sf "$PWD/scripts" "$HOME/Scripts"
+

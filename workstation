@@ -28,7 +28,3 @@ flatpak install org.kryogenix.Pick -y
 # Install fonts
 echo -e "\n-- Installing fonts"
 "$PWD/install/install-fonts"
-
-# Link personnal scripts
-echo "Symlink scripts"
-ln -sf "$PWD/scripts" "$HOME/Scripts"
