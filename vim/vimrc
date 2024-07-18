@@ -266,7 +266,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   "" Which file type
   let g:copilot_filetypes = {
     \ 'gitcommit': v:true,
-    \ 'markdown': v:false,
+    \ 'markdown': v:true,
     \ 'yaml': v:false,
     \ 'python': v:true,
     \ 'r': v:true,
