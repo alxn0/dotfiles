@@ -40,7 +40,6 @@ go install github.com/stefanlogue/meteor@latest
 go install github.com/rwxrob/keg/cmd/keg@latest
 
 # Python global utilities
-pipx ensurepath
 pipx install tldr
 pipx install td-watson
 
