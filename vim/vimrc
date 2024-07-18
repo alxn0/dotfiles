@@ -127,13 +127,16 @@ let maplocalleader = ','
 " Yank to end of line (behave as D and C)
 nnoremap Y y$
 
-" Yank to global clipboard
-vnoremap <leader>y :w !xclip -selection clipboard<Cr><Cr>
-"nnoremap <leader>y :call system('xclip', @0) " SUPPOSE TO SEND LAST YANK... 
+" Yank to system clipboard
+" Assume xclip is installed (and being on X11)
+" Don't understand why <C-Y> does not work instead of <leader>y
+vnoremap <leader>y :w !xclip -sel clip<Cr><Cr>
+nnoremap <C-P> :r !xclip -o -sel clip<Cr>
 
 " Yank/paste to/from tmux clipboard
-vnoremap <C-y> y<cr>:call system("tmux load-buffer -", @0)<cr>gv
-nnoremap <C-p> :let @0 = system("tmux save-buffer -")<cr>"0p<cr>g;
+" DOES NOT WORK
+"vnoremap <C-y> y<cr>:call system("tmux load-buffer -", @0)<cr>gv
+"nnoremap <C-p> :let @0 = system("tmux save-buffer -")<cr>"0p<cr>g;
 
 " Quit terminal mode
 tnoremap <Esc> <C-\><C-n>
