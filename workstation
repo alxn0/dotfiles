@@ -12,6 +12,9 @@ sudo apt install lynx -y
 cd lynx && ./setup
 cd ..
 
+# Install from apt
+sudo apt install ddgr -y
+
 # Install from flatpak
 echo -e "\n-- Installing various app from flatpak"
 flatpak install org.zotero.Zotero -y
