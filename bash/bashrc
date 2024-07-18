@@ -130,8 +130,8 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias ipython='ipython3'
-alias python='python3'
+#alias ipython='ipython3'
+#alias python='python3'
 alias bat=batcat
 #alias analysis='source $HOME/.local/python_venv/analysis/bin/activate'
 alias \?='duck'
