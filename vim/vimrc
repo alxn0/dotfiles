@@ -250,7 +250,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
         \}
   
   "" Stop annoying R lintr 
-  autocmd FileType r ALEToggle
+  autocmd FileType r ALEToggleBuffer
 
   let g:ale_sign_error = '>>'
   let g:ale_sign_warning = '--'
