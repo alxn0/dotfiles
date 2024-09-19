@@ -245,7 +245,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " ALE
   "" Use shellcheck by default for bash/sh
   let b:ale_linters = {
-        \ 'python': ['pyflakes'],
+        \ 'python': ['ruff'],
         \ 'r':['lintr']
         \}
   
