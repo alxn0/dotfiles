@@ -130,6 +130,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias chmox='chmod +x'
 alias tmp='cd $TMPDIRECTORY'
+alias bat=batcat
 
 # -------------------- Auto completion ---------------------------- #
 # enable programmable completion features (you don't need to enable
@@ -168,4 +169,3 @@ else
     fi
 fi
 unset __conda_setup
-
