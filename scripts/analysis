@@ -1,4 +1,0 @@
-#!/bin/bash
-# Load python venv for analysis in REPL mode
-source $HOME/.local/python_venv/analysis/bin/activate
-
