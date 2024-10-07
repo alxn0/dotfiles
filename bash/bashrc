@@ -107,9 +107,10 @@ export GHFOLDER="$HOME/GitHub"
 export GHUSER="alxn0"
 export GHTEAM="polygonteam"
 export TMPDIRECTORY="$HOME/tmp"
+export PROJECTS="$HOME/Projects"
 
 # -------------- cdpath -------------------------------#
-export CDPATH=".:$GHFOLDER/$GHUSER:$GHFOLDER/$GHTEAM:$GHFOLDER"
+export CDPATH=".:$GHFOLDER/$GHUSER:$GHFOLDER/$GHTEAM:$GHFOLDER:$PROJECTS"
 
 # -------------------- Coloured command -------------------------- #
 
