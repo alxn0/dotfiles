@@ -15,6 +15,7 @@ sudo apt install shellcheck -y
 sudo apt install ripgrep -y
 sudo apt install bat -y
 sudo apt install curl -y
+sudo apt install age -y
 
 # Configs
 for i in bash git vim tmux python;
