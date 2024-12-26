@@ -1,18 +1,23 @@
 " author: Alexandre Naud
-" note: design for VIM 8+
+" note: design for VIM 8+ and NVIM
 
 " ------------------- General options --------------------------------
-set nocompatible    " Disable compatibility with vi
-set nobackup        " Do not save backup file
+if !has('nvim')
+  set nocompatible    " Disable compatibility with vi
+  set nobackup        " Do not save backup file
+  set background=dark " Fix different colors in tmux....
+endif
+
 set splitright      " Vertical split on the right
-set background=dark " Fix different colors in tmux....
 set modifiable      " Make a buffer modifiable...
 set history=100     " Command history
 
 " ------------------- Editor options -------------------------
-filetype on " Enable filetype detection
-filetype plugin on " Load plugins for detected filetype
-filetype indent on " Load indent file by filetype
+if !has('nvim')
+  filetype on " Enable filetype detection
+  filetype plugin on " Load plugins for detected filetype
+  filetype indent on " Load indent file by filetype
+endif
 
 " Use a line cursor within insert mode and a block cursor everywhere else.
 "
@@ -24,8 +29,10 @@ filetype indent on " Load indent file by filetype
 "  Ps = 4  -> steady underline.
 "  Ps = 5  -> blinking bar (xterm).
 "  Ps = 6  -> steady bar (xterm).
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
+if !has('nvim')
+  let &t_SI = "\e[6 q"
+  let &t_EI = "\e[2 q"
+endif
 
 " numbered lined
 set nonumber
@@ -51,7 +58,9 @@ set incsearch " Highlight incrementally as they are found
 nohl          " Avoir highlighting last search when sourcing .vimrc 
 
 " Scrolling
-set ttyfast " Faster scrolling
+if !has('nvim')
+  set ttyfast " Faster scrolling
+endif
 
 " start at last place you were editing
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -116,7 +125,9 @@ set wildmenu " Enable auto completion menu
 set wildmode=list:longest " Make wild menu behave like bash
 
 " -------------------------- Mouse ------------------------------
-set mouse=a " Mouse enable in all modes
+if has('nvim')
+  set mouse=a " Enable mouse in all modes
+endif
 
 " -------------------------- Mappings ---------------------------
 
@@ -125,7 +136,9 @@ let mapleader = ';'
 let maplocalleader = ','
 
 " Yank to end of line (behave as D and C)
-nnoremap Y y$
+if !has('nvim')
+  noremap Y y$
+endif
 
 " Yank to system clipboard
 " Assume xclip is installed (and being on X11)
@@ -225,7 +238,15 @@ set statusline+=\ %4p%%                    " File percent
 
 " -------------------------- Plugins ----------------------------
 " Only load plugins if Plug detected
-if filereadable(expand('~/.vim/autoload/plug.vim'))
+" Detect whether running in Vim or Neovim and set the appropriate plug path
+if has('nvim')
+  let s:plug_path = '~/.local/share/nvim/site/autoload/plug.vim'
+else
+  let s:plug_path = '~/.vim/autoload/plug.vim'
+endif
+
+" If vim-plug is installed, use it to manage your plugins
+if filereadable(expand(s:plug_path))
   
   call plug#begin()
   Plug 'jpalardy/vim-slime'     " REPL for vim
