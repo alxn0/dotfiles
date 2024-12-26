@@ -75,8 +75,8 @@ set wrap
 " windows. Note: Soft break don't add <EOL> 
 set linebreak
 
-" Some stuff in vim 8
-if v:version >= 800
+" Some stuff in vim 8 and nvim
+if (!has('nvim') && v:version >= 800) || has('nvim')
   set nofixendofline " Don't automatically add <EOF> when missing
 
   " More useful list characters
@@ -252,7 +252,6 @@ if filereadable(expand(s:plug_path))
   Plug 'jpalardy/vim-slime'     " REPL for vim
   Plug 'dense-analysis/ale'     " Asychronous Lint Engine
   Plug 'github/copilot.vim'     " GitHub copilot
-  Plug 'preservim/nerdtree'     " File explorer
   call plug#end()
 
   " vim-slime
@@ -287,23 +286,21 @@ if filereadable(expand(s:plug_path))
   "" Which file type
   let g:copilot_filetypes = {
     \ 'gitcommit': v:true,
-    \ 'markdown': v:true,
+    \ 'markdown': v:false,
     \ 'yaml': v:false,
     \ 'python': v:true,
     \ 'r': v:true,
     \ 'sh': v:true,
-    \ 'vim': v:true
+    \ 'vim': v:true,
+    \ 'plaintext': v:false, 
+    \ 'json': v:false 
     \ }
 
-  "" Avoid copilot in file > 100kb
-   autocmd BufReadPre *
-     \ let f=getfsize(expand("<afile>"))
-     \ | if f > 100000 || f == -2
-     \ | let b:copilot_enabled = v:false
-     \ | endif
+  " Avoid copilot in file > 100kb
+  autocmd BufReadPre *
+    \ let f=getfsize(expand("<afile>"))
+    \ | if f > 100000 || f == -2
+    \ | let b:copilot_enabled = v:false
+    \ | endif
 
-   "" Nerdtree keyboard shortcut
-   nnoremap <leader>n :NERDTree<CR>
-   nnoremap <leader>t :NERDTreeToggle<CR>
- 
 endif
