@@ -231,7 +231,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'jpalardy/vim-slime'     " REPL for vim
   Plug 'dense-analysis/ale'     " Asychronous Lint Engine
   Plug 'github/copilot.vim'     " GitHub copilot
-  Plug 'preservim/nerdtree'     " File explorer
   call plug#end()
 
   " vim-slime
@@ -281,8 +280,4 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
      \ | let b:copilot_enabled = v:false
      \ | endif
 
-   "" Nerdtree keyboard shortcut
-   nnoremap <leader>n :NERDTree<CR>
-   nnoremap <leader>t :NERDTreeToggle<CR>
- 
 endif
