@@ -152,6 +152,10 @@ if [ -f "$HOME/Scripts/venv" ]; then
   source "$HOME/Scripts/venv"
 fi
 
+# -------------------- fzf integration -------------------------- #
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+eval "$(fzf --bash)"
+
 # ---------------------- z history cmd ------------------------- #
 # Stop using it for the moment with CDPATH
 # Source Z
