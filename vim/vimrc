@@ -5,9 +5,14 @@
 set nocompatible    " Disable compatibility with vi
 set nobackup        " Do not save backup file
 set splitright      " Vertical split on the right
-set background=dark " Fix different colors in tmux....
 set modifiable      " Make a buffer modifiable...
 set history=100     " Command history
+
+" ------------------- Color scheme -----------------------------------
+set background=dark
+set termguicolors
+colorscheme hybrid_alacritty
+hi Normal ctermbg=NONE guibg=NONE
 
 " ------------------- Editor options -------------------------
 filetype on " Enable filetype detection
@@ -196,48 +201,35 @@ noremap <right> :echoerr "Umm, use l instead"<CR>
 au FileType markdown noremap j gj
 au FileType markdown noremap k gk
 
+" Netrw
+nnoremap <leader>e :Lexplore<CR>
 " ------------------------ Status line --------------------------
-"  TODO Change to ruler!!!
-"  See set ruf
-
-"function! GitBranch()
-"  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-"endfunction
-
-"function! StatuslineGit()
-"  let l:branchname = GitBranch()
-"  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-"endfunction
-
+" Need to change highlight groups base on the color scheme
 set laststatus=2
 
 set statusline=
-"set statusline+=%#PmenuSel#                " Black backgroun
-"set statusline+=%{StatuslineGit()}         " Show git branch
-set statusline+=%#LineNr#                  " Colored file path
+set statusline+=%#Directory#               " Directory color
 set statusline+=\ %{expand('%:p:h:t')}/%t  " File name with parent directory
-"set statusline+=\ %f                        " The path relative to current dir
+"set statusline+=\ %f                      " The path relative to current dir
 set statusline+=%m                         " Save status (modification)
+set statusline+=%#WarningMsg#              " Warning color
 set statusline+=%r                         " Read only flag
-set statusline+=%#PmenuSel#                " Black backgroun
+set statusline+=%#LineNr#                  " Line number color
 set statusline+=%=                         " Align right (following stuff)
-set statusline+=%y                                           " File type
+set statusline+=%y                         " File type
 set statusline+=\                          " White space
 
 " Encoding with warning if not UTF-8
-set statusline+=%#warningmsg#%6{(&fenc!='utf-8'&&&fenc!='')?''.&fenc.'':''}
-set statusline+=%#PmenuSel#%6{(&fenc=='utf-8'&&&fenc!='')?''.&fenc.'':''}
+set statusline+=%#WarningMsg#%6{(&fenc!='utf-8'&&&fenc!='')?''.&fenc.'':''}
+set statusline+=%#LineNr#%6{(&fenc=='utf-8'&&&fenc!='')?''.&fenc.'':''}
 
 " File format with warning if not unix
-set statusline+=%#warningmsg#%{&ff!='unix'?':'.&ff.'':''}
-set statusline+=%#PmenuSel#%{&ff=='unix'?':'.&ff.'':''}
+set statusline+=%#Warningmsg#%{&ff!='unix'?':'.&ff.'':''}
+set statusline+=%#LineNr#%{&ff=='unix'?':'.&ff.'':''}
 
-"set statusline+=\ %6{&fileencoding?&fileencoding:&encoding}  " Encoding
-"set statusline+=\:%{&fileformat}                             " Format
-
-set statusline+=%#PmenuSel#                " Black background
-set statusline+=\ %4l,%c                   " Line, columns
-set statusline+=\ %4p%%                    " File percent
+set statusline+=%#LineNr#               " Line number color
+set statusline+=\ %4l,%c                  " Line, columns
+set statusline+=\ %4p%%                   " File percent
 
 " -------------------------- Plugins ----------------------------
 " Only load plugins if Plug detected

@@ -12,3 +12,4 @@ fi
 # Create symbolic link
 echo "Creating symbolic links"
 ln -sf "$PWD/vimrc" "$HOME/.vimrc"
+ln -sf "$PWD/colors" "$HOME/.vim/colors"
