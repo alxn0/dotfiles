@@ -19,7 +19,7 @@ sudo apt install curl -y
 sudo apt install age -y
 
 # Configs
-for i in bash git vim tmux python;
+for i in bash git vim tmux ipython;
 do
   echo "Setup $i"
   cd $i && ./setup
