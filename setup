@@ -25,7 +25,11 @@ do
   cd ..
 done
 
-# Install stuff
+# Install Z
+echo -e "\n-- Installing Z"
+curl -sSLO https://raw.githubusercontent.com/rupa/z/master/z.sh -o "$HOME/.z.sh"
+
+# (Semi) complex installations
 cd "$PWD/install"
 
 echo -e "\n-- Installing gh"
