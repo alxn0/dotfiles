@@ -165,9 +165,9 @@ tnoremap <Esc> <C-\><C-n>
 " Disable search highlighting when refreshing screen
 nnoremap <C-L> :nohl<CR><C-L> 
 
-" Edit / Reload .vimrc
-nnoremap <leader>rr :source ~/.vimrc<CR>
+" Edit / Source .vimrc
 nnoremap <leader>re :e ~/.vimrc<CR>
+nnoremap <leader>rs :so ~/.vimrc<CR>
 
 " Open a terminal on the right
 nnoremap <leader>t :vertical botright term<CR>
