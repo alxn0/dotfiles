@@ -15,9 +15,9 @@ colorscheme hybrid_alacritty
 hi Normal ctermbg=NONE guibg=NONE
 
 " ------------------- Editor options -------------------------
-filetype on " Enable filetype detection
-filetype plugin on " Load plugins for detected filetype
-filetype indent on " Load indent file by filetype
+filetype on         " Enable filetype detection
+filetype plugin on  " Load plugins for detected filetype
+filetype indent on  " Load indent file by filetype
 
 " Use a line cursor within insert mode and a block cursor everywhere else.
 "
@@ -37,26 +37,26 @@ set nonumber
 
 " Set textwidth and colored vertical lines
 set textwidth=72
-set colorcolumn= " Set colored vertical lines (Toggle with F2 at 80)
+set colorcolumn=    " Set colored vertical lines (Toggle with F2 at 80)
 highlight ColorColumn ctermbg=8
 
 " Set special key (mainly listchars) colors
 highlight SpecialKey ctermfg=8
 
 " Indentation
-set smartindent "Auto indent in a 'smart' way
-set autoindent "automatically indent new lines
-set shiftwidth=2 " Autoindent width (>> in normal mode)
-set tabstop=2 " Tab width
-set expandtab " Use spaces instead of tabs
+set smartindent     " Auto indent in a 'smart' way
+set autoindent      " Automatically indent new lines
+set shiftwidth=2    " Autoindent width (>> in normal mode)
+set tabstop=2       " Tab width
+set expandtab       " Use spaces instead of tabs
 
 " Search
-set hlsearch  " Highlight words when searched
-set incsearch " Highlight incrementally as they are found
-nohl          " Avoir highlighting last search when sourcing .vimrc 
+set hlsearch        " Highlight words when searched
+set incsearch       " Highlight incrementally as they are found
+nohl                " Avoir highlighting last search when sourcing .vimrc 
 
 " Scrolling
-set ttyfast " Faster scrolling
+set ttyfast         " Faster scrolling
 
 " start at last place you were editing
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -73,7 +73,7 @@ set linebreak
 
 " Some stuff in vim 8
 if v:version >= 800
-  set nofixendofline " Don't automatically add <EOF> when missing
+  set nofixendofline    " Don't automatically add <EOF> when missing
 
   " More useful list characters
   set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
@@ -118,12 +118,12 @@ au bufnewfile,bufRead keg set ft=yaml
 
 " ------------------------ Completion ---------------------------
 "" Command line completion
-set wildmenu " Enable auto completion menu
+set wildmenu              " Enable auto completion menu
 set wildmode=list:longest " Make wild menu behave like bash
 
 "" Omni completion (To better work with lsp)
-set completeopt-=preview " Don't show preview window
-set completeopt+=popup " Use popup menu for completion preview
+set completeopt-=preview  " Don't show preview window
+set completeopt+=popup    " Use popup menu for completion preview
 set completepopup+=width:80
 set completepopup+=highlight:Pmenu
 set completepopup+=align:item
@@ -227,7 +227,7 @@ set statusline+=%#LineNr#%6{(&fenc=='utf-8'&&&fenc!='')?''.&fenc.'':''}
 set statusline+=%#Warningmsg#%{&ff!='unix'?':'.&ff.'':''}
 set statusline+=%#LineNr#%{&ff=='unix'?':'.&ff.'':''}
 
-set statusline+=%#LineNr#               " Line number color
+set statusline+=%#LineNr#                 " Line number color
 set statusline+=\ %4l,%c                  " Line, columns
 set statusline+=\ %4p%%                   " File percent
 
@@ -243,7 +243,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     if v:version >= 900
-      Plug 'yegappan/lsp'               " Language Server Protocol
+      Plug 'yegappan/lsp'                " Language Server Protocol
     endif
   call plug#end()
 
