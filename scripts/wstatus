@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# Display watson status only if a project is started
-# Use to display in tmux status bar
-
-if [[ ! $(watson status) =~ "No project started" ]]; then
-  echo "$(watson status -p) $(watson status -t) $(watson status -e)"
-fi
-
