@@ -103,19 +103,9 @@ export PATH="/usr/local/go/bin:$PATH"
 
 # ------------- Environment variable ------------------ #
 export EDITOR=vim
-export GHFOLDER="$HOME/GitHub"
-export GHUSER="alxn0"
-export GHTEAM="polygonteam"
 export TMPDIRECTORY="$HOME/tmp"
-export PROJECTS="$HOME/Projects"
-export SOPS_AGE_RECIPIENTS=$(<"$HOME/.secrets/sops-public-age")
-export SOPS_AGE_KEY_FILE="$HOME/.secrets/sops-private-age"
-
-# -------------- cdpath -------------------------------#
-export CDPATH=".:$GHFOLDER/$GHUSER:$GHFOLDER/$GHTEAM:$GHFOLDER:$PROJECTS"
 
 # -------------------- Coloured command -------------------------- #
-
 # enable color support for ls and grep
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" \
@@ -127,13 +117,11 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # -------------------- Aliases ---------------------------------- #
-
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias chmox='chmod +x'
 alias tmp='cd $TMPDIRECTORY'
-alias bat=batcat
 
 # -------------------- Auto completion ---------------------------- #
 # enable programmable completion features (you don't need to enable
