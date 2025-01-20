@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Open tmux with 4 panes
+# 1. top left: aerc
+# 2. top right: gcalcli
+# 3. bottom left: taskwarrior
+# 4. bottom right: asciiquarium
+
+# Launch tmux
+tmux new-session -d -s work
+
+# Create for pane
+tmux split-window -v -t work
+tmux split-window -h -t work
+tmux select-pane -t work:0.0
+tmux split-window -h -t work
+
+# Launch app in each pane
+tmux send-keys -t work:0.0 'task project:Polygon or project:nodata -backlog' C-m
+tmux send-keys -t work:0.1 'gcalcli calm' C-m
+tmux send-keys -t work:0.2 'aerc' C-m
+tmux send-keys -t work:0.3 'asciiquarium' C-m
+
+# Attach
+tmux attach -t work
+
+
+
