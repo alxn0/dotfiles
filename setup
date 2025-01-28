@@ -12,18 +12,13 @@ sudo apt install entr -y
 sudo apt install tree -y
 sudo apt install xclip -y
 sudo apt install shellcheck -y
-sudo apt install fzf -y
 sudo apt install ripgrep -y
 sudo apt install curl -y
 sudo apt install podman -y
 
-# Configs
-for i in bash git vim tmux ipython;
-do
-  echo "Setup $i"
-  cd $i && ./setup
-  cd ..
-done
+# Install fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
+"$HOME/.fzf/install"
 
 # Install Z
 echo -e "\n-- Installing Z"
@@ -59,6 +54,15 @@ go install github.com/rwxrob/keg/cmd/keg@latest
 
 # Python global utilities
 pipx install tldr
+pipx install python-lsp-server
+
+# Configs
+for i in bash git vim tmux ipython;
+do
+  echo "Setup $i"
+  cd $i && ./setup
+  cd ..
+done
 
 # Link personnal scripts
 echo "Symlink scripts"
