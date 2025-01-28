@@ -22,7 +22,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
 
 # Install Z
 echo -e "\n-- Installing Z"
-curl -sSLO https://raw.githubusercontent.com/rupa/z/master/z.sh -o "$HOME/.z.sh"
+curl -sSL https://raw.githubusercontent.com/rupa/z/master/z.sh -o "$HOME/.z.sh"
 
 # (Semi) complex installations
 cd "$PWD/install"
