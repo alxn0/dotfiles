@@ -1,3 +1,0 @@
-#!/bin/sh
-export KEG_CURRENT="$GHFOLDER/$GHUSER/zet/docs"
-exec keg "$@"

@@ -1,70 +1,18 @@
 #!/bin/bash
 
-# Updating repository and upgrading system 
-echo -e "\n-- Update and upgrade" 
-sudo apt update
-sudo apt upgrade  -y
+# Check all folders in ./dotfiles
+# and run setup in each of them
 
-echo -e "\n-- Installing various app from debian package manager"
-sudo apt install vim -y
-sudo apt install tmux -y
-sudo apt install entr -y 
-sudo apt install tree -y
-sudo apt install xclip -y
-sudo apt install shellcheck -y
-sudo apt install ripgrep -y
-sudo apt install curl -y
-sudo apt install podman -y
+for folder in dotfiles/*; do
 
-# Install fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
-"$HOME/.fzf/install"
-
-# Install Z
-echo -e "\n-- Installing Z"
-curl -sSL https://raw.githubusercontent.com/rupa/z/master/z.sh -o "$HOME/.z.sh"
-
-# (Semi) complex installations
-cd "$PWD/install"
-
-echo -e "\n-- Installing gh"
-"$PWD/install-gh"
-
-echo -e "\n-- Installing R"
-"$PWD/install-R"
-
-echo -e "\n-- Installing go"
-"$PWD/install-go"
-
-echo -e "\n-- Installing cht.sh CLI client"
-"$PWD/install-cht"
-
-echo -e "\n-- Installing docker"
-"$PWD/install-docker"
-
-echo -e "\n-- Installing miniconda3"
-"$PWD/install-miniconda3"
-
-cd ..
-
-# Install go binaries
-go install github.com/charmbracelet/mods@latest
-go install github.com/stefanlogue/meteor@latest
-go install github.com/rwxrob/keg/cmd/keg@latest
-
-# Python global utilities
-pipx install tldr
-pipx install python-lsp-server
-
-# Configs
-for i in bash git vim tmux ipython;
-do
-  echo "Setup $i"
-  cd $i && ./setup
-  cd ..
+  # For printing
+  basename="${folder##*/}"
+  
+  # Check if setup file exists and run it
+  if [ -f "$folder/setup" ]; then
+	cd "$folder" || exit
+	echo "Setup $basename"
+	"./setup"
+	cd - || exit
+  fi
 done
-
-# Link personnal scripts
-echo "Symlink scripts"
-ln -sf "$PWD/scripts" "$HOME/Scripts"
-

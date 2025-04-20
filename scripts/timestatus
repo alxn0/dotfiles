@@ -1,8 +1,0 @@
-#!/bin/bash
-
-input_text=$(timew)
-
-text_part=$(echo "$input_text" | sed -n 's/.*Tracking \(.*"\).*/\1/p')
-time_part=$(echo "$input_text" | grep 'Total' | awk '{print $NF}')
-
-echo "$text_part $time_part"

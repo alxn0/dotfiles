@@ -1,4 +1,0 @@
-#!/bin/sh
-# Convert to google markdown format
-# Use in pipe or vim !!
-exec pandoc -t gfm --wrap=none

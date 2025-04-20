@@ -1,27 +1,19 @@
 # Linux terminal environments for dev and data analysis
+This repository hosts my dotfiles and other configurations for terminal-based workflow.
 
-This repository hosts my personal dotfiles and scripts for configuring a Linux development environment.
-It includes configuration files Bash, Tmux, Vim, and several custom scripts for terminal-based development.
-Last tested on Ubuntu 24.04 "something" numbat.
-
-## Contents
-
-- `setup`: Main installation script for setting up a terminal-based development environment
-- `install/`: Installation scripts for GitHub CLI, Go, R and fonts
-- `scripts/`: Bash scripts for various tasks
-- other folder: configurations and setup scripts for specific tools
+Last tested on Ubuntu 25.04.
 
 ## Installation
-
 Clone the repo, and run setup.
 
 ## Note
+A way to detect if in WSL environment.
 
-A way to detect if in WSL environment
 Not using it for the moment as I prefer
 running desktop ubuntu than Windows+WSL
+
 Keep a trace for potential futur use.
-Taken from get.docker
+Taken from `get.docker`
 
 ``` Bash
 is_wsl() {

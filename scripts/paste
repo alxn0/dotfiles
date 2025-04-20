@@ -1,5 +1,0 @@
-#!/bin/bash
-# Send to system clipboard
-# To be used in a pipe (STDOUT -> clipboard)
-exec xclip -o -selection clipboard
-
