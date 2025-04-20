@@ -1,4 +1,4 @@
-# Linux terminal environments for dev and data analysis
+# Dotfiles 
 This repository hosts my dotfiles and other configurations for terminal-based workflow.
 
 Last tested on Ubuntu 25.04.
