@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Create symbolik link
+echo "creating symbolik link"
+ln -sf "$PWD/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
