@@ -244,9 +244,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'tpope/vim-commentary'          " Easy commenting
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    if v:version >= 900
-      Plug 'yegappan/lsp'                " Language Server Protocol
-    endif
+    "if v:version >= 900
+    "  Plug 'yegappan/lsp'                " Language Server Protocol
+    "endif
   call plug#end()
 
   " ----------------- Undo tree -------------------
@@ -343,32 +343,36 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
   " ------------ LSP -------------------
   " Set LSP options
-  let lspOpts = #{
+
+  "let lspOpts = #{
         \ aleSupport: v:true,
         \ autoComplete: v:false,
         \ autoHighlight: v:false,
         \ }
 
-  autocmd User LspSetup call LspOptionsSet(lspOpts)
+  "autocmd User LspSetup call LspOptionsSet(lspOpts)
 
   " Add servers
-  let lspServers = [#{
+
+  "let lspServers = [#{
             \	  name: 'pythonlsp',
   	        \	  filetype: ['python'],
   	        \	  path: 'pylsp',
   	        \	  args: []
             \ }]
-          
-  autocmd User LspSetup call LspAddServer(lspServers)
- 
+
+  "autocmd User LspSetup call LspAddServer(lspServers)
+
   " Define some key mappings
-  nnoremap <leader>ld :LspGotoDefinition<CR>
-  nnoremap <leader>lr :LspShowReferences<CR>
-  nnoremap <leader>lR :LspRename<CR>
-  nnoremap <leader>l# :LspHighlight<CR>
-  nnoremap <leader>lh :LspHover<CR>
+
+  "nnoremap <leader>ld :LspGotoDefinition<CR>
+  "nnoremap <leader>lr :LspShowReferences<CR>
+  "nnoremap <leader>lR :LspRename<CR>
+  "nnoremap <leader>l# :LspHighlight<CR>
+  "nnoremap <leader>lh :LspHover<CR>
 
   " Use <C-L> to clear highlight
-  nnoremap <C-L> :nohl \| :LspHighlightClear <CR><C-L>
+
+  "nnoremap <C-L> :nohl \| :LspHighlightClear <CR><C-L>
 
 endif
