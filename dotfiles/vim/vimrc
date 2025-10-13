@@ -240,6 +240,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'jpalardy/vim-slime'            " REPL for vim
     Plug 'dense-analysis/ale'            " Asychronous Lint Engine
     Plug 'github/copilot.vim'            " GitHub copilot
+    Plug 'tpope/vim-vinegar'             " Enhance netrw
+    Plug 'tpope/vim-commentary'          " Easy commenting
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     if v:version >= 900
