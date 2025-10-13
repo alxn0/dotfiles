@@ -301,17 +301,22 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   nnoremap <leader>af :ALEFix<CR>
 
   "------------ Copilot -----------------
-  "" Which file type
-  let g:copilot_filetypes = {
-    \ 'gitcommit': v:true,
-    \ 'markdown': v:false,
-    \ 'conf': v:false,
-    \ 'yaml': v:false,
-    \ 'python': v:true,
-    \ 'r': v:true,
-    \ 'sh': v:true,
-    \ 'vim': v:true
-    \ }
+
+  " "" Which file type
+  " let g:copilot_filetypes = {
+  "   \ 'gitcommit': v:true,
+  "   \ 'markdown': v:false,
+  "   \ 'conf': v:false,
+  "   \ 'yaml': v:false,
+  "   \ 'json': v:false,
+  "   \ 'python': v:true,
+  "   \ 'r': v:true,
+  "   \ 'sh': v:true,
+  "   \ 'vim': v:true
+  "   \ }
+
+  "" Stard copilot disable by default
+  let g:copilot_enabled = v:false
 
   "" Avoid copilot in file > 100kb
   autocmd BufReadPre *
