@@ -1,0 +1,93 @@
+# Git Prompt Configuration
+# This file configures the git-prompt.sh features for enhanced git status display
+# Source this file from your bashrc after loading git-prompt.sh
+
+# ---------------- Git Prompt Features ----------------
+# The following environment variables control what information is displayed
+# in your git prompt.
+
+# Show dirty state indicators:
+#   * = unstaged changes (modified files not staged)
+#   + = staged changes (files added to index)
+#   # = new repository with no commits yet
+GIT_PS1_SHOWDIRTYSTATE=1
+
+# Show stash state:
+#   $ = something is stashed
+GIT_PS1_SHOWSTASHSTATE=1
+
+# Show untracked files:
+#   % = untracked files present
+GIT_PS1_SHOWUNTRACKEDFILES=1
+
+# Show upstream state (ahead/behind remote):
+# Options:
+#   "auto"          = shows < (behind), > (ahead), <> (diverged), = (synced)
+#   "verbose"       = shows u+N (ahead by N), u-N (behind by N), u= (synced)
+#   "auto verbose"  = combines both
+#   "name"          = also shows the upstream branch name
+GIT_PS1_SHOWUPSTREAM="auto"
+
+# Show conflict state during merges:
+#   |CONFLICT = unresolved merge conflicts present
+GIT_PS1_SHOWCONFLICTSTATE="yes"
+
+# Enable color hints:
+# Colors branch name green (normal) or red (detached HEAD)
+# Colors dirty state markers red, staged changes green, etc.
+GIT_PS1_SHOWCOLORHINTS=1
+
+# ---------------- Additional Options (Commented) ----------------
+
+# Show sparse checkout state:
+#   |SPARSE = repository uses sparse checkout
+# Uncomment to compress to single '?' character:
+# GIT_PS1_COMPRESSSPARSESTATE=1
+# Uncomment to hide sparse state entirely:
+# GIT_PS1_OMITSPARSESTATE=1
+
+# Hide prompt in ignored directories:
+# When set, prompt is hidden if pwd is ignored by git
+# GIT_PS1_HIDE_IF_PWD_IGNORED=1
+
+# Change separator between branch and state symbols:
+# Default is a space " "
+# GIT_PS1_STATESEPARATOR="|"
+
+# Configure detached HEAD description style:
+# Options: contains, branch, describe, tag, default
+# GIT_PS1_DESCRIBE_STYLE="describe"
+
+# ---------------- Example Prompt Outputs ----------------
+# Clean repo synced with remote:
+#   [master =] user@host:~/project$
+#
+# Ahead of remote by 2 commits:
+#   [master u+2] user@host:~/project$
+#
+# Behind remote by 3 commits:
+#   [master u-3] user@host:~/project$
+#
+# Diverged (ahead 2, behind 1):
+#   [master u+2-1] user@host:~/project$
+#
+# With unstaged changes:
+#   [master u+1 *] user@host:~/project$
+#
+# With staged changes:
+#   [master u+1 +] user@host:~/project$
+#
+# With both staged and unstaged:
+#   [master u+1 *+] user@host:~/project$
+#
+# With untracked files:
+#   [master u+1 %] user@host:~/project$
+#
+# With stashed changes:
+#   [master u+1 $] user@host:~/project$
+#
+# Everything at once:
+#   [master u+2-1 *+$%] user@host:~/project$
+#
+# During merge with conflicts:
+#   [master *+|MERGING|CONFLICT] user@host:~/project$

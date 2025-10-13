@@ -48,6 +48,11 @@ stty stop undef
 
 # ----------------- Prompt ---------------------- #
 
+# Loading git-prompt configurations
+if [ -f "$HOME/.bashrc_git" ]; then
+  . "$HOME/.bashrc_git"
+fi
+
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
@@ -158,12 +163,13 @@ j() {
     cd "$(z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
 
+# ---------- Load development tools initialization ---------- #
+if [ -f "$HOME/.bashrc_tools" ]; then
+  . "$HOME/.bashrc_tools"
+fi
+
 # ---------- Load private configurations ------------------ #
 if [ -f "$HOME/.bashrc_private" ]; then
   . "$HOME/.bashrc_private"
 fi
 
-# ---------- Load development tools initialization ---------- #
-if [ -f "$HOME/.bashrc_tools" ]; then
-  . "$HOME/.bashrc_tools"
-fi
