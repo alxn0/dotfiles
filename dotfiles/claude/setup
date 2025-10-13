@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Create symbolik link
+echo "creating symbolik link"
+# Create directory if it doesn't exist
+if [ ! -d "$HOME/.claude" ]; then
+  mkdir -p "$HOME/.claude"
+fi
+ln -sf "$PWD/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
