@@ -19,9 +19,9 @@ startup_mode = "Maximized"
 x = 5
 y = 5
 
-[colors.normal]
-
-[general]
-live_config_reload = true
+#[colors.normal]
 #blue = "#7aa6da"
+
+#[general]
+#live_config_reload = true
 
