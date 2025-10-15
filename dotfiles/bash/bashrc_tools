@@ -2,48 +2,88 @@
 # This file contains initialization for various development tools and package managers
 # that may not be present on all systems.
 
+# ---------------- Helper functions ---------------- #
+
+# Add directory to PATH if command or directory exists
+# Usage: add_to_path_if_exists <command_name> <path_to_add>
+#        add_to_path_if_exists "" <path_to_add>  # Check only directory
+add_to_path_if_exists() {
+    local cmd="$1"
+    local path_to_add="$2"
+
+    # Check if command exists OR directory exists
+    if [ -n "$cmd" ] && command -v "$cmd" &> /dev/null; then
+        # Add to PATH if not already present
+        case ":$PATH:" in
+            *":$path_to_add:"*) ;;
+            *) export PATH="$path_to_add:$PATH" ;;
+        esac
+    elif [ -d "$path_to_add" ]; then
+        # Add to PATH if not already present
+        case ":$PATH:" in
+            *":$path_to_add:"*) ;;
+            *) export PATH="$path_to_add:$PATH" ;;
+        esac
+    fi
+}
+
 # ------------------- conda initialize -------------------------- #
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/alex/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/alex/miniconda3/etc/profile.d/conda.sh" ]; then
- . "/home/alex/miniconda3/etc/profile.d/conda.sh"  # commented out by conda initialize  # commented out by conda initialize
+if command -v conda &> /dev/null || [ -f "$HOME/miniconda3/bin/conda" ]; then
+    __conda_setup="$('/home/alex/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
     else
- export PATH="/home/alex/miniconda3/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
+        if [ -f "/home/alex/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "/home/alex/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/alex/miniconda3/bin:$PATH"
+        fi
     fi
+    unset __conda_setup
 fi
-unset __conda_setup
 
 # ------------------ NVM --------------------- #
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [ -d "$HOME/.nvm" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 
-# pnpm
-export PNPM_HOME="/home/alex/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+# ------------------ pnpm --------------------- #
+if command -v pnpm &> /dev/null || [ -d "$HOME/.local/share/pnpm" ]; then
+    export PNPM_HOME="$HOME/.local/share/pnpm"
+    add_to_path_if_exists "pnpm" "$PNPM_HOME"
+fi
 
-# >>> juliaup initialize >>>
-
+# ------------------ juliaup ----------------- #
 # !! Contents within this block are managed by juliaup !!
+add_to_path_if_exists "julia" "$HOME/.juliaup/bin"
 
-case ":$PATH:" in
-    *:/home/alex/.juliaup/bin:*)
-        ;;
+# ------------------ pixi --------------------- #
+add_to_path_if_exists "pixi" "$HOME/.pixi/bin"
 
-    *)
-        export PATH=/home/alex/.juliaup/bin${PATH:+:${PATH}}
-        ;;
-esac
+# ------------------ Rust/Cargo --------------- #
+add_to_path_if_exists "cargo" "$HOME/.cargo/bin"
 
-# <<< juliaup initialize <<<
-export PATH="/home/alex/.pixi/bin:$PATH"
+# ------------------ Go ----------------------- #
+add_to_path_if_exists "go" "/usr/local/go/bin"
+add_to_path_if_exists "go" "$HOME/go/bin"
 
-# Created by `pipx` on 2025-10-13 19:58:12
-export PATH="$PATH:/home/alex/.local/bin"
+# ------------------- fzf --------------------- #
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+eval "$(fzf --bash)"
+
+# ---------------------- z ------------------------- #
+# Source Z
+if [ -f "$HOME/.z.sh" ]; then 
+  . $HOME/.z.sh 
+fi
+
+# Interactive z with fzf
+j() {
+    [ $# -gt 0 ] && z "$*" && return
+    cd "$(z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+}
+
+

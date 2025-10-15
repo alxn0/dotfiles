@@ -103,8 +103,6 @@ bind -m vi-insert 'Control-l: clear-screen'
 # -------------- PATH --------------------------------- #
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Scripts:$PATH"
-export PATH="$HOME/go/bin:$PATH"
-export PATH="/usr/local/go/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 # ------------- Environment variable ------------------ #
@@ -145,23 +143,6 @@ fi
 #if [ -f "$HOME/Scripts/venv" ]; then
 #  source "$HOME/Scripts/venv"
 #fi
-
-# -------------------- fzf integration -------------------------- #
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-eval "$(fzf --bash)"
-
-# ---------------------- z history cmd ------------------------- #
-# Stop using it for the moment with CDPATH
-# Source Z
-if [ -f "$HOME/.z.sh" ]; then 
-  . $HOME/.z.sh 
-fi
-
-# Interactive z with fzf
-j() {
-    [ $# -gt 0 ] && z "$*" && return
-    cd "$(z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
-}
 
 # ---------- Load development tools initialization ---------- #
 if [ -f "$HOME/.bashrc_tools" ]; then
