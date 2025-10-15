@@ -124,6 +124,9 @@ set wildmode=list:longest " Make wild menu behave like bash
 "" Omni completion (To better work with lsp)
 set completeopt-=preview  " Don't show preview window
 set completeopt+=popup    " Use popup menu for completion preview
+set completeopt+=menuone  " Show menu even with single match
+set completeopt+=noinsert " Don't insert text automatically
+set completeopt+=noselect " Don't select first item automatically
 set completepopup+=width:80
 set completepopup+=highlight:Pmenu
 set completepopup+=align:item
@@ -244,9 +247,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'tpope/vim-commentary'          " Easy commenting
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    "if v:version >= 900
-    "  Plug 'yegappan/lsp'                " Language Server Protocol
-    "endif
+    if v:version >= 900
+      Plug 'yegappan/lsp'                " Language Server Protocol
+    endif
   call plug#end()
 
   " ----------------- Undo tree -------------------
@@ -349,35 +352,42 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " ------------ LSP -------------------
   " Set LSP options
 
-  "let lspOpts = #{
-        \ aleSupport: v:true,
-        \ autoComplete: v:false,
-        \ autoHighlight: v:false,
-        \ }
+  let lspOpts = #{
+       \ aleSupport: v:true,
+       \ autoComplete: v:true,
+       \ autoHighlight: v:false,
+       \ }
 
-  "autocmd User LspSetup call LspOptionsSet(lspOpts)
+  autocmd User LspSetup call LspOptionsSet(lspOpts)
 
   " Add servers
 
-  "let lspServers = [#{
+   let lspServers = [#{
             \	  name: 'pythonlsp',
   	        \	  filetype: ['python'],
   	        \	  path: 'pylsp',
   	        \	  args: []
             \ }]
 
-  "autocmd User LspSetup call LspAddServer(lspServers)
+
+   "let lspServers = [#{
+            \	  name: 'zuban',
+  	        \	  filetype: ['python'],
+  	        \	  path: 'zuban',
+  	        \	  args: ['server']
+            \ }]
+
+  autocmd User LspSetup call LspAddServer(lspServers)
 
   " Define some key mappings
 
-  "nnoremap <leader>ld :LspGotoDefinition<CR>
-  "nnoremap <leader>lr :LspShowReferences<CR>
+  nnoremap <leader>ld :LspGotoDefinition<CR>
+  nnoremap <leader>lr :LspShowReferences<CR>
   "nnoremap <leader>lR :LspRename<CR>
-  "nnoremap <leader>l# :LspHighlight<CR>
-  "nnoremap <leader>lh :LspHover<CR>
+  nnoremap <leader>l# :LspHighlight<CR>
+  nnoremap <leader>lh :LspHover<CR>
 
   " Use <C-L> to clear highlight
-
-  "nnoremap <C-L> :nohl \| :LspHighlightClear <CR><C-L>
+  nnoremap <C-L> :nohl \| :LspHighlightClear <CR><C-L>
 
 endif
