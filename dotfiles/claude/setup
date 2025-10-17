@@ -6,4 +6,12 @@ echo "creating symbolik link"
 if [ ! -d "$HOME/.claude" ]; then
   mkdir -p "$HOME/.claude"
 fi
+# Make symbolic link
 ln -sf "$PWD/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+
+# Be sure to remove current agents as ln -s
+# cannot overwrite directory
+if [ -d "$HOME/.claude/agents" ]; then
+  rm -rf "$HOME/.claude/agents"
+fi
+ln -sf "$PWD/agents/" "$HOME/.claude/"
