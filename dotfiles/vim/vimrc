@@ -247,6 +247,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'tpope/vim-commentary'          " Easy commenting
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    Plug 'lambdalisue/vim-fern'          " File explorer - drawer
     if v:version >= 900
       Plug 'yegappan/lsp'                " Language Server Protocol
     endif
