@@ -241,13 +241,13 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   call plug#begin()
     Plug 'mbbill/undotree'							 " Undo tree
     Plug 'jpalardy/vim-slime'            " REPL for vim
+    Plug 'lambdalisue/vim-fern'          " File explorer
     Plug 'dense-analysis/ale'            " Asychronous Lint Engine
     Plug 'github/copilot.vim'            " GitHub copilot
     Plug 'tpope/vim-vinegar'             " Enhance netrw
     Plug 'tpope/vim-commentary'          " Easy commenting
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'lambdalisue/vim-fern'          " File explorer - drawer
     if v:version >= 900
       Plug 'yegappan/lsp'                " Language Server Protocol
     endif
@@ -263,6 +263,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
   xmap <space> <Plug>SlimeRegionSend
   nmap <space> <Plug>SlimeParagraphSend
+
+  " ------------ Fern --------------------
+  nnoremap <leader>f :Fern . -drawer -toggle<CR>
 
   "------------- ALE ---------------------
   " Disable ALE's language server
