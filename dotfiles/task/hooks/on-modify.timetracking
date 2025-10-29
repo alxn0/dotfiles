@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+"""
+Taskwarrior hook for automatic time tracking.
+
+Tracks time when tasks are started/stopped and updates totalactivetime and timelog UDAs.
+See docs/UDAs.md for complete specification.
+"""
+import sys
+import json
+from datetime import datetime
+
+def parse_taskwarrior_date(date_str):
+    """Parse Taskwarrior ISO 8601 basic format (20251027T175734Z)."""
+    if not date_str:
+        return None
+    from datetime import timezone
+    # Use strptime for basic ISO format with UTC timezone
+    return datetime.strptime(date_str, '%Y%m%dT%H%M%SZ').replace(tzinfo=timezone.utc)
+
+
+def main():
+    try:
+        # Read original and modified tasks from stdin
+        original = json.loads(sys.stdin.readline())
+        modified = json.loads(sys.stdin.readline())
+
+        # Check if task was started or stopped
+        original_active = 'start' in original and original['start']
+        modified_active = 'start' in modified and modified['start']
+
+        # Calculate time delta if task was stopped
+        if original_active and not modified_active:
+            start_time = parse_taskwarrior_date(original['start'])
+            stop_time = datetime.now().astimezone()
+
+            if start_time:
+                delta_seconds = int((stop_time - start_time).total_seconds())
+
+                # Ensure delta is non-negative
+                if delta_seconds < 0:
+                    delta_seconds = 0
+
+                # Add to existing total
+                current_total = modified.get('totalactivetime', 0)
+                modified['totalactivetime'] = current_total + delta_seconds
+
+                # Add segment to timelog with lazy ID assignment
+                # ID will be assigned by CLI on first access (null = unassigned)
+                start_epoch = int(start_time.timestamp())
+                stop_epoch = int(stop_time.timestamp())
+
+                # Get existing timelog
+                timelog_str = modified.get('timelog', '[]')
+                try:
+                    timelog = json.loads(timelog_str)
+                except (json.JSONDecodeError, TypeError):
+                    timelog = []
+
+                # Append new segment with null ID (lazy assignment)
+                timelog.append({
+                    'id': None,
+                    'start': start_epoch,
+                    'end': stop_epoch
+                })
+
+                # Store back as JSON string
+                modified['timelog'] = json.dumps(timelog)
+
+        # Output modified task
+        print(json.dumps(modified))
+        return 0
+
+    except (json.JSONDecodeError, ValueError, KeyError) as e:
+        # On error, output the modified task unchanged
+        print(json.dumps(modified), file=sys.stderr)
+        return 1
+
+if __name__ == '__main__':
+    sys.exit(main())

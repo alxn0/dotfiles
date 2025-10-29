@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Create symbolic link
+echo "creating symbolic link"
+ln -sf "$PWD/taskrc" "$HOME/.taskrc"
+
+if [[ ! -d "$HOME/.task" ]]; then
+  mkdir "$HOME/.task"
+fi
+
+ln -sf "$PWD/hooks" "$HOME/.task/hooks"
+
