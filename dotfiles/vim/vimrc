@@ -375,6 +375,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " Set preview windows hidden by default, and shown with ctrl-p
   let g:fzf_preview_window = ['hidden', 'ctrl-p']
 
+  nnoremap <leader>b :Buffers<cr>
+  nnoremap <leader>f :Files<cr>
+
   " ------------ LSP -------------------
   " Set LSP options
 
