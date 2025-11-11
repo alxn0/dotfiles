@@ -293,13 +293,20 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
         \ 'python': ['ruff'],
         \ 'r':['lintr'],
         \ 'sh': ['shellcheck'],
+        \ 'markdown': ['markdownlint']
         \}
 
+  let g:ale_markdown_markdownlint_executable = 'markdownlint-cli2'
+  
   " Set fixers
   let b:ale_fixers = {
         \ 'python': ['ruff'],
         \ 'r': ['styler'],
+        \ 'markdown': ['remove_trailing_lines', 'trim_whitespace']
         \}
+
+  " Test for a while before using it by default
+  let g:ale_fix_on_save = 0   
 
   " Stop annoying R lintr 
   "autocmd FileType r ALEToggleBuffer
@@ -311,6 +318,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " Key mapping
   nnoremap <leader>at :ALEToggle<CR>
   nnoremap <leader>af :ALEFix<CR>
+  nnoremap <leader>mf :w<CR>:silent !markdownlint-cli2 --fix %<CR>:e!<CR>
 
   "------------ Copilot -----------------
 
