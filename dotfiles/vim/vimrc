@@ -249,6 +249,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'github/copilot.vim'            " GitHub copilot
     Plug 'tpope/vim-vinegar'             " Enhance netrw
     Plug 'tpope/vim-commentary'          " Easy commenting
+    Plug 'lervag/wiki.vim'               " Notes/wiki functionalities
+    Plug 'vim-pandoc/vim-pandoc-syntax'  " More markdown syntx
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     if v:version >= 900
@@ -334,6 +336,15 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
      \ | if f > 100000 || f == -2
      \ | let b:copilot_enabled = v:false
      \ | endif
+
+  " ------------ wiki.vim --------------
+  let g:wiki_root = '~/Documents/Notes'
+  let g:wiki_filetypes = ['md']
+
+  " --------- vim-pandoc-style ---------
+  augroup pandoc_syntax
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+  augroup END
 
   " ------------ FZF -------------------
   " Customize fzf colors to match your color scheme
