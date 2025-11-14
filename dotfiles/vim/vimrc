@@ -270,7 +270,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   nmap <space> <Plug>SlimeParagraphSend
 
   " ------------ Fern --------------------
-  nnoremap <leader>f :Fern . -drawer -toggle<CR>
+  nnoremap <leader>d :Fern . -drawer -toggle<CR>
 
   "------------- ALE ---------------------
   " Disable ALE's language server
