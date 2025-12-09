@@ -108,6 +108,7 @@ export PATH="$HOME/bin:$PATH"
 # ------------- Environment variable ------------------ #
 export EDITOR=vim
 export TMPDIRECTORY="$HOME/tmp"
+export NOTES="$HOME/Documents/Notes"
 
 # -------------------- Coloured command -------------------------- #
 # enable color support for ls and grep
