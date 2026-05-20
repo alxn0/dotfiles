@@ -242,20 +242,20 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 if filereadable(expand('~/.vim/autoload/plug.vim'))
   
   call plug#begin()
-    Plug 'mbbill/undotree'							 " Undo tree
+"    Plug 'mbbill/undotree'							 " Undo tree
     Plug 'jpalardy/vim-slime'            " REPL for vim
-    Plug 'lambdalisue/vim-fern'          " File explorer
+"    Plug 'lambdalisue/vim-fern'          " File explorer
     Plug 'dense-analysis/ale'            " Asychronous Lint Engine
-    Plug 'github/copilot.vim'            " GitHub copilot
+"    Plug 'github/copilot.vim'            " GitHub copilot
     Plug 'tpope/vim-vinegar'             " Enhance netrw
     Plug 'tpope/vim-commentary'          " Easy commenting
     Plug 'lervag/wiki.vim'               " Notes/wiki functionalities
     Plug 'vim-pandoc/vim-pandoc-syntax'  " More markdown syntx
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    if v:version >= 900
-      Plug 'yegappan/lsp'                " Language Server Protocol
-    endif
+"    if v:version >= 900
+"      Plug 'yegappan/lsp'                " Language Server Protocol
+"    endif
   call plug#end()
 
   " ----------------- Undo tree -------------------
@@ -291,18 +291,17 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " Set linters
   let b:ale_linters = {
         \ 'python': ['ruff'],
+        \ 'javascript' : ['eslint'],
         \ 'r':['lintr'],
-        \ 'sh': ['shellcheck'],
-        \ 'markdown': ['markdownlint']
+        \ 'sh': ['shellcheck']
         \}
 
-  let g:ale_markdown_markdownlint_executable = 'markdownlint-cli2'
-  
   " Set fixers
   let b:ale_fixers = {
+        \ '*': ['remove_trailing_lines', 'trim_whitespace'],
         \ 'python': ['ruff'],
-        \ 'r': ['styler'],
-        \ 'markdown': ['remove_trailing_lines', 'trim_whitespace']
+        \ 'javascript': ['eslint', 'prettier'],
+        \ 'r': ['styler']
         \}
 
   " Test for a while before using it by default
@@ -318,7 +317,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " Key mapping
   nnoremap <leader>at :ALEToggle<CR>
   nnoremap <leader>af :ALEFix<CR>
-  nnoremap <leader>mf :w<CR>:silent !markdownlint-cli2 --fix %<CR>:e!<CR>
 
   "------------ Copilot -----------------
 
@@ -335,15 +333,15 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   "   \ 'vim': v:true
   "   \ }
 
-  "" Stard copilot disable by default
-  let g:copilot_enabled = v:false
+  " "" Stard copilot disable by default
+  " let g:copilot_enabled = v:false
 
-  "" Avoid copilot in file > 100kb
-  autocmd BufReadPre *
-     \ let f=getfsize(expand("<afile>"))
-     \ | if f > 100000 || f == -2
-     \ | let b:copilot_enabled = v:false
-     \ | endif
+  " "" Avoid copilot in file > 100kb
+  " autocmd BufReadPre *
+  "    \ let f=getfsize(expand("<afile>"))
+  "    \ | if f > 100000 || f == -2
+  "    \ | let b:copilot_enabled = v:false
+  "    \ | endif
 
   " ------------ wiki.vim --------------
   let g:wiki_root = '~/Documents/Notes'
@@ -378,45 +376,59 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   nnoremap <leader>b :Buffers<cr>
   nnoremap <leader>f :Files<cr>
 
-  " ------------ LSP -------------------
-  " Set LSP options
+  " " ------------ LSP -------------------
+  " " Set LSP options
 
-  let lspOpts = #{
-       \ aleSupport: v:true,
-       \ autoComplete: v:true,
-       \ autoHighlight: v:false,
-       \ }
+  " let lspOpts = #{
+  "      \ aleSupport: v:true,
+  "      \ autoComplete: v:false,
+  "      \ autoHighlight: v:false,
+  "      \ }
 
-  autocmd User LspSetup call LspOptionsSet(lspOpts)
+  " autocmd User LspSetup call LspOptionsSet(lspOpts)
 
-  " Add servers
+  " " Add servers
 
-   let lspServers = [#{
-            \	  name: 'pythonlsp',
-  	        \	  filetype: ['python'],
-  	        \	  path: 'pylsp',
-  	        \	  args: []
-            \ }]
+  "  let lspServers = [#{
+  "           \	  name: 'pythonlsp',
+  " 	        \	  filetype: ['python'],
+  " 	        \	  path: 'pylsp',
+  " 	        \	  args: []
+  "           \ }]
 
+  "  let lspServers = [#{
+  "           \	  name: 'pythonlsp',
+  " 	        \	  filetype: ['python'],
+  " 	        \	  path: 'pylsp',
+  " 	        \	  args: []
+  "           \ }]
 
-   "let lspServers = [#{
-            \	  name: 'zuban',
-  	        \	  filetype: ['python'],
-  	        \	  path: 'zuban',
-  	        \	  args: ['server']
-            \ }]
+  " let lspServers = [#{
+  "           \   name: 'typescriptlang',
+  "           \   filetype: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+  "           \   path: 'typescript-language-server',
+  "           \   args: ['--stdio'],
+  "           \   rootSearch: ['package.json', 'tsconfig.json', 'jsconfig.json', '.git']
+  "           \ }]
 
-  autocmd User LspSetup call LspAddServer(lspServers)
+  " "  let lspServers = [#{
+  " "           \	  name: 'languageserver',
+  " " 	        \	  filetype: ['r'],
+  " " 	        \	  path: 'R',
+  " " 	        \	  args: ["--no-echo", "-e", "languageserver::run()"]
+  " "           \ }]
 
-  " Define some key mappings
+  " autocmd User LspSetup call LspAddServer(lspServers)
 
-  nnoremap <leader>ld :LspGotoDefinition<CR>
-  nnoremap <leader>lr :LspShowReferences<CR>
-  "nnoremap <leader>lR :LspRename<CR>
-  nnoremap <leader>l# :LspHighlight<CR>
-  nnoremap <leader>lh :LspHover<CR>
+  " " Define some key mappings
 
-  " Use <C-L> to clear highlight
-  nnoremap <C-L> :nohl \| :LspHighlightClear <CR><C-L>
+  " " nnoremap <leader>ld :LspGotoDefinition<CR>
+  " " nnoremap <leader>lr :LspShowReferences<CR>
+  " " nnoremap <leader>lR :LspRename<CR>
+  " " nnoremap <leader>l# :LspHighlight<CR>
+  " " nnoremap <leader>lh :LspHover<CR>
+
+  " " Use <C-L> to clear highlight
+  " nnoremap <C-L> :nohl \| :LspHighlightClear <CR><C-L>
 
 endif
