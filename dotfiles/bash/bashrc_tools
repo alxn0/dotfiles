@@ -86,4 +86,11 @@ j() {
     cd "$(z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
 
-
+# --------------------- railway ---------------------- #
+#
+# >>> railway initialize >>>
+if [ -f "$HOME/.railwy/env" ]; then
+  source $HOME/.railway/env
+fi
+source "$HOME/.railway/env"
+# <<< railway initialize <<<
