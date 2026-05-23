@@ -109,6 +109,17 @@ export PATH="$HOME/bin:$PATH"
 export EDITOR=vim
 export TMPDIRECTORY="$HOME/tmp"
 export NOTES="$HOME/Documents/Notes"
+export ZEIT_DATABASE="$HOME/Data/zeit"
+
+# ------------- Secrets toolkit (passage / sops) ------ #
+# Values are resolved at runtime via passage; no secret is stored here.
+export PASSAGE_DIR="$HOME/Data/store"
+export PASSAGE_IDENTITIES_FILE="$HOME/.vault/identities"
+export SOPS_AGE_KEY="$(passage SOPS/Private)"
+export SOPS_AGE_RECIPIENTS="$(passage SOPS/Public)"
+export OPENAI_API_KEY="$(passage API/OpenAI)"
+export ANTHROPIC_API_KEY="$(passage API/Anthropic)"
+export GOOGLE_API_KEY="$(passage API/Gemini)"
 
 # -------------------- Coloured command -------------------------- #
 # enable color support for ls and grep
@@ -148,10 +159,5 @@ fi
 # ---------- Load development tools initialization ---------- #
 if [ -f "$HOME/.bashrc_tools" ]; then
   . "$HOME/.bashrc_tools"
-fi
-
-# ---------- Load private configurations ------------------ #
-if [ -f "$HOME/.bashrc_private" ]; then
-  . "$HOME/.bashrc_private"
 fi
 
