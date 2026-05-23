@@ -1,12 +1,11 @@
 #!/bin/bash
+set -euo pipefail
 
 # Create symbolic link
 echo "creating symbolic link"
 ln -sf "$PWD/taskrc" "$HOME/.taskrc"
 
-if [[ ! -d "$HOME/.task" ]]; then
-  mkdir "$HOME/.task"
-fi
+mkdir -p "$HOME/.task"
 
-ln -sf "$PWD/hooks" "$HOME/.task/hooks"
-
+# -n so re-running links the dir itself instead of nesting inside an existing link.
+ln -sfn "$PWD/hooks" "$HOME/.task/hooks"

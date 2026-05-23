@@ -1,5 +1,7 @@
 #!/bin/bash
+set -euo pipefail
 
-# Create symbolik link
-echo "creating symbolik link"
+# Create symbolic link
+echo "creating symbolic link"
+mkdir -p "$HOME/.config/alacritty"
 ln -sf "$PWD/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"

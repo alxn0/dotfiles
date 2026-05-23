@@ -1,9 +1,14 @@
 #!/bin/bash
+set -euo pipefail
 
-# Create symbolik link
-echo "creating symbolik link"
+# Create symbolic link
+echo "creating symbolic link"
 ln -sf "$PWD/tmux.conf" "$HOME/.tmux.conf"
 
-# Add autocompletion (.bash_completion is autoloaded by bash-completion)
-echo "Copyin autocompletion"
-cp "$PWD/tmux_completion" "$HOME/.bash_completion"
+# Add autocompletion.
+# Use the XDG per-command directory (autoloaded by bash-completion) instead of
+# the shared ~/.bash_completion file, which other tools also write to.
+echo "Linking tmux completion"
+completion_dir="$HOME/.local/share/bash-completion/completions"
+mkdir -p "$completion_dir"
+ln -sf "$PWD/tmux_completion" "$completion_dir/tmux"

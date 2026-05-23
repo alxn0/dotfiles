@@ -1,5 +1,6 @@
 #!/bin/bash
+set -euo pipefail
 
-# Copy to $HOME
-echo "Copy git prompt to $HOME"
-cp "$PWD/git-prompt.sh" "$HOME/.git-prompt.sh"
+# Symlink so repo edits propagate without re-running setup.
+echo "Linking git prompt to $HOME"
+ln -sf "$PWD/git-prompt.sh" "$HOME/.git-prompt.sh"

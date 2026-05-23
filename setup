@@ -1,18 +1,20 @@
 #!/bin/bash
+set -euo pipefail
 
-# Check all folders in ./dotfiles
-# and run setup in each of them
+# Run each dotfiles/*/setup script.
+# A single module failure is reported but does not abort the others.
 
-for folder in dotfiles/*; do
+# Always operate from the repository root, regardless of the caller's CWD.
+cd "$(dirname "$0")"
 
-  # For printing
-  basename="${folder##*/}"
-  
-  # Check if setup file exists and run it
-  if [ -f "$folder/setup" ]; then
-	cd "$folder" || exit
-	echo "Setup $basename"
-	"./setup"
-	cd - || exit
+for folder in dotfiles/*/; do
+  [ -f "$folder/setup" ] || continue
+
+  basename="$(basename "$folder")"
+  echo "Setup $basename"
+
+  # Subshell keeps the cd local; no need to cd back.
+  if ! ( cd "$folder" && ./setup ); then
+    echo "  ! $basename setup failed" >&2
   fi
 done
