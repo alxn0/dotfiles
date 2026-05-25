@@ -102,7 +102,7 @@ bind -m vi-insert 'Control-l: clear-screen'
 
 # -------------- PATH --------------------------------- #
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/Scripts:$PATH"
+export PATH="$HOME/scripts:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 # ------------- Environment variable ------------------ #
@@ -138,6 +138,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias chmox='chmod +x'
 alias tmp='cd $TMPDIRECTORY'
+alias nb='cd $(note where)'
 
 # -------------------- Auto completion ---------------------------- #
 # enable programmable completion features (you don't need to enable
