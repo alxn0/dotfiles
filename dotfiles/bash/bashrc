@@ -47,51 +47,11 @@ shopt -s checkwinsize
 stty stop undef
 
 # ----------------- Prompt ---------------------- #
-
-# Loading git-prompt configurations
-if [ -f "$HOME/.bashrc_git" ]; then
-  . "$HOME/.bashrc_git"
+# Prompt assembly (git baseline + optional prj cloud-sync indicator) lives in
+# its own unit so adding a segment never means editing PS1 branches here.
+if [ -f "$HOME/.bashrc_prompt" ]; then
+  . "$HOME/.bashrc_prompt"
 fi
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-if [ "$color_prompt" = yes ]; then
-  if [ -f "$HOME/.git-prompt.sh" ]; then
-    . "$HOME/.git-prompt.sh"
-    PS1='$(__git_ps1 "[%s] ")${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-  else
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ ' 
-  fi
-else
-  if [ -f "$HOME/.git-prompt.sh" ]; then
-    . "$HOME/.git-prompt.sh"
-    PS1='$(__git_ps1 "[%s] ")${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-  else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-  fi
-fi
-
-unset color_prompt
-
-## If this is an xterm set the title to user@host:dir
-#case "$TERM" in
-#xterm*|rxvt*)
-#    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-#    ;;
-#*)
-#    ;;
-#esac
-
-# Shrink prompt
-PROMPT_DIRTRIM=2
 
 # -------------------- VI Mode ---------------------------- #
 
@@ -108,18 +68,14 @@ export PATH="$HOME/bin:$PATH"
 # ------------- Environment variable ------------------ #
 export EDITOR=vim
 export TMPDIRECTORY="$HOME/tmp"
-export NOTES="$HOME/Documents/Notes"
-export ZEIT_DATABASE="$HOME/Data/zeit"
 
-# ------------- Secrets toolkit (passage / sops) ------ #
-# Values are resolved at runtime via passage; no secret is stored here.
-export PASSAGE_DIR="$HOME/Data/store"
-export PASSAGE_IDENTITIES_FILE="$HOME/.vault/identities"
-export SOPS_AGE_KEY="$(passage SOPS/Private)"
-export SOPS_AGE_RECIPIENTS="$(passage SOPS/Public)"
-export OPENAI_API_KEY="$(passage API/OpenAI)"
-export ANTHROPIC_API_KEY="$(passage API/Anthropic)"
-export GOOGLE_API_KEY="$(passage API/Gemini)"
+# ------------- Private env & secrets ------------------ #
+# Machine-local, not in this public repo: private paths plus a lazy
+# load_secrets() that resolves credentials via passage on demand. Absent on
+# machines that need none (e.g. a bare server), so this is a guarded source.
+if [ -f "$HOME/.bashrc_private" ]; then
+  . "$HOME/.bashrc_private"
+fi
 
 # -------------------- Coloured command -------------------------- #
 # enable color support for ls and grep
@@ -139,6 +95,7 @@ alias l='ls -CF'
 alias chmox='chmod +x'
 alias tmp='cd $TMPDIRECTORY'
 alias nb='cd $(note where)'
+alias nh='cd $(note home)'
 
 # -------------------- Auto completion ---------------------------- #
 # enable programmable completion features (you don't need to enable
@@ -161,4 +118,3 @@ fi
 if [ -f "$HOME/.bashrc_tools" ]; then
   . "$HOME/.bashrc_tools"
 fi
-

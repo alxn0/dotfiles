@@ -1,0 +1,53 @@
+# Prompt assembly — sourced from bashrc.
+#
+# Two tiers, by how universal the capability is:
+#   * git-prompt — baseline, assumed on every machine (branch + dirty/upstream
+#     state). Configured by bashrc_git, rendered by __git_ps1.
+#   * prj-prompt — optional cloud-sync indicator, present only where the private
+#     prj tool is installed. A no-op fallback keeps PS1 valid everywhere else.
+#
+# PS1 references both __git_ps1 and __prj_ps1 unconditionally; each self-guards
+# (empty outside a git repo / outside ~/Projects), so segments are added here
+# without growing the branch count.
+
+# --- git baseline -------------------------------------------------------------
+# git-prompt feature flags (GIT_PS1_*).
+if [ -f "$HOME/.bashrc_git" ]; then
+  . "$HOME/.bashrc_git"
+fi
+# Fallback so PS1 stays valid even if git-prompt.sh is missing.
+__git_ps1() { :; }
+if [ -f "$HOME/.git-prompt.sh" ]; then
+  . "$HOME/.git-prompt.sh"
+fi
+
+# --- prj optional segment -----------------------------------------------------
+# No-op unless the private prj-prompt.sh overrides it (installed by the prj repo).
+__prj_ps1() { :; }
+if [ -f "$HOME/.prj-prompt.sh" ]; then
+  . "$HOME/.prj-prompt.sh"
+fi
+
+# --- chroot tag ---------------------------------------------------------------
+# Identify the chroot we work in (shown in the prompt below).
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# --- PS1 ----------------------------------------------------------------------
+# Fancy prompt only where the terminal advertises color; one branch, not four,
+# because both prompt functions degrade to empty on their own.
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+if [ "$color_prompt" = yes ]; then
+  PS1='$(__git_ps1 "[%s] ")${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__prj_ps1 " (%s)")\$ '
+else
+  PS1='$(__git_ps1 "[%s] ")${debian_chroot:+($debian_chroot)}\u@\h:\w$(__prj_ps1 " (%s)")\$ '
+fi
+
+unset color_prompt
+
+# Shrink long paths in the prompt to the last two components.
+PROMPT_DIRTRIM=2

@@ -6,6 +6,7 @@ echo "create symbolic links"
 ln -sf "$PWD/bashrc" "$HOME/.bashrc"
 ln -sf "$PWD/bashrc_tools" "$HOME/.bashrc_tools"
 ln -sf "$PWD/bashrc_git" "$HOME/.bashrc_git"
+ln -sf "$PWD/bashrc_prompt" "$HOME/.bashrc_prompt"
 ln -sf "$PWD/inputrc" "$HOME/.inputrc"
 
 # Copy zscript
