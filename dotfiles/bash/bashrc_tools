@@ -27,8 +27,13 @@ add_to_path_if_exists() {
     fi
 }
 
-# ------------------- conda initialize -------------------------- #
-# !! Contents within this block are managed by 'conda init' !!
+# Source a file if it exists
+# Usage: source_if_exists <file>
+source_if_exists() {
+    [ -f "$1" ] && . "$1"
+}
+
+# ------------------- conda --------------------- #
 if command -v conda &> /dev/null || [ -f "$HOME/miniconda3/bin/conda" ]; then
     __conda_setup="$('/home/alex/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
     if [ $? -eq 0 ]; then
@@ -57,7 +62,6 @@ if command -v pnpm &> /dev/null || [ -d "$HOME/.local/share/pnpm" ]; then
 fi
 
 # ------------------ juliaup ----------------- #
-# !! Contents within this block are managed by juliaup !!
 add_to_path_if_exists "julia" "$HOME/.juliaup/bin"
 
 # ------------------ pixi --------------------- #
@@ -71,14 +75,15 @@ add_to_path_if_exists "go" "/usr/local/go/bin"
 add_to_path_if_exists "go" "$HOME/go/bin"
 
 # ------------------- fzf --------------------- #
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-eval "$(fzf --bash)"
+# Prefer modern integration (fzf >= 0.48); fall back to legacy install file.
+if command -v fzf &> /dev/null; then
+    eval "$(fzf --bash)"
+else
+    source_if_exists ~/.fzf.bash
+fi
 
 # ---------------------- z ------------------------- #
-# Source Z
-if [ -f "$HOME/.z.sh" ]; then 
-  . $HOME/.z.sh 
-fi
+source_if_exists "$HOME/.z.sh"
 
 # Interactive z with fzf
 j() {
@@ -86,11 +91,11 @@ j() {
     cd "$(z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
 
-# --------------------- railway ---------------------- #
-#
-# >>> railway initialize >>>
-if [ -f "$HOME/.railwy/env" ]; then
-  source $HOME/.railway/env
+# ------------------ bun ---------------------- #
+if command -v bun &> /dev/null || [ -d "$HOME/.bun" ]; then
+    export BUN_INSTALL="$HOME/.bun"
+    add_to_path_if_exists "bun" "$BUN_INSTALL/bin"
 fi
-source "$HOME/.railway/env"
-# <<< railway initialize <<<
+
+# --------------------- railway ---------------------- #
+source_if_exists "$HOME/.railway/env"
