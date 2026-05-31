@@ -8,10 +8,12 @@ ln -sf "$PWD/bashrc_tools" "$HOME/.bashrc_tools"
 ln -sf "$PWD/bashrc_git" "$HOME/.bashrc_git"
 ln -sf "$PWD/bashrc_prompt" "$HOME/.bashrc_prompt"
 ln -sf "$PWD/inputrc" "$HOME/.inputrc"
+ln -sf "$PWD/z.sh" "$HOME/.z.sh"
 
 # List to see that everything is 
 ls -l "$HOME/.bashrc" \
   "$HOME/.bashrc_tools" \
   "$HOME/.bashrc_git" \
   "$HOME/.bashrc_prompt" \
-  "$HOME/.inputrc"
+  "$HOME/.inputrc" \
+  "$HOME/.z.sh"
