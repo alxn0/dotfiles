@@ -2,5 +2,7 @@
 set -euo pipefail
 
 # Symlink so repo edits propagate without re-running setup.
-echo "Linking git prompt to $HOME"
+echo "Linking git prompt"
 ln -sf "$PWD/git-prompt.sh" "$HOME/.git-prompt.sh"
+ls -l "$HOME/.git-prompt.sh"
+

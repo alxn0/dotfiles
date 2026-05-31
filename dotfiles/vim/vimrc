@@ -249,7 +249,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 "    Plug 'github/copilot.vim'            " GitHub copilot
     Plug 'tpope/vim-vinegar'             " Enhance netrw
     Plug 'tpope/vim-commentary'          " Easy commenting
-    Plug 'lervag/wiki.vim'               " Notes/wiki functionalities
+"    Plug 'lervag/wiki.vim'               " Notes/wiki functionalities
+    Plug 'alxn0/wikijump'                " Navigate / rename wikilinks
     Plug 'vim-pandoc/vim-pandoc-syntax'  " More markdown syntx
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -344,8 +345,12 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   "    \ | endif
 
   " ------------ wiki.vim --------------
-  let g:wiki_root = '~/Documents/Notes'
-  let g:wiki_filetypes = ['md']
+  " let g:wiki_root = '~/Documents/Notes'
+  " let g:wiki_filetypes = ['md']
+
+  " ------------ wikijump --------------
+  nmap <buffer> <Tab> <Cmd>WikijumpNext<CR>
+  nmap <buffer> <S-Tab> <Cmd>WikijumpPrev<CR>
 
   " --------- vim-pandoc-style ---------
   augroup pandoc_syntax

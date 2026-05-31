@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -e
 
 # Run each dotfiles/*/setup script.
 # A single module failure is reported but does not abort the others.

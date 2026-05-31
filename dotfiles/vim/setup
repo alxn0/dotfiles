@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -e
 
 # Prerequisite: curl is required to fetch vim-plug.
 if ! command -v curl &> /dev/null; then
@@ -17,8 +17,9 @@ else
 fi
 
 # Create symbolic links
-echo "Creating symbolic links"
+echo "Linking vimrc and colors"
 mkdir -p "$HOME/.vim"
 ln -sf "$PWD/vimrc" "$HOME/.vimrc"
 # -n so re-running links the dir itself instead of nesting inside an existing link.
 ln -sfn "$PWD/colors" "$HOME/.vim/colors"
+ls -l "$HOME/.vimrc" "$HOME/.vim/colors"

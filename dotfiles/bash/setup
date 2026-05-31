@@ -1,15 +1,17 @@
 #!/bin/bash
-set -euo pipefail
+set -e
 
 # Creating symbolic link
-echo "create symbolic links"
+echo "Linking bashrc scripts"
 ln -sf "$PWD/bashrc" "$HOME/.bashrc"
 ln -sf "$PWD/bashrc_tools" "$HOME/.bashrc_tools"
 ln -sf "$PWD/bashrc_git" "$HOME/.bashrc_git"
 ln -sf "$PWD/bashrc_prompt" "$HOME/.bashrc_prompt"
 ln -sf "$PWD/inputrc" "$HOME/.inputrc"
 
-# Copy zscript
-# Stop using it for the moment
-#echo "Copying zscripts"
-#cp -f "$PWD/z.sh" "$HOME/.zsh"
+# List to see that everything is 
+ls -l "$HOME/.bashrc" \
+  "$HOME/.bashrc_tools" \
+  "$HOME/.bashrc_git" \
+  "$HOME/.bashrc_prompt" \
+  "$HOME/.inputrc"
