@@ -94,3 +94,8 @@ fi
 if command -v note &> /dev/null; then
   eval "$(note init bash)"
 fi
+
+# --------------------- pet ------------------------- #
+if command -v pet &> /dev/null; then
+  eval "$(pet completion bash)"
+fi
