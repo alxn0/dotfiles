@@ -17,9 +17,10 @@ else
 fi
 
 # Create symbolic links
-echo "Linking vimrc and colors"
-mkdir -p "$HOME/.vim"
+echo "Linking vimrc, colors and after/syntax"
+mkdir -p "$HOME/.vim/after/syntax"
 ln -sf "$PWD/vimrc" "$HOME/.vimrc"
 # -n so re-running links the dir itself instead of nesting inside an existing link.
 ln -sfn "$PWD/colors" "$HOME/.vim/colors"
-ls -l "$HOME/.vimrc" "$HOME/.vim/colors"
+ln -sf "$PWD/markdown.vim" "$HOME/.vim/after/syntax/markdown.vim"
+ls -l "$HOME/.vimrc" "$HOME/.vim/colors" "$HOME/.vim/after/syntax/markdown.vim"

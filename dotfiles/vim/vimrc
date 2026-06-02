@@ -251,7 +251,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'tpope/vim-commentary'          " Easy commenting
 "    Plug 'lervag/wiki.vim'               " Notes/wiki functionalities
     Plug 'alxn0/wikijump'                " Navigate / rename wikilinks
-    Plug 'vim-pandoc/vim-pandoc-syntax'  " More markdown syntx
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
 "    if v:version >= 900
@@ -351,11 +350,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " ------------ wikijump --------------
   nmap <buffer> <Tab> <Cmd>WikijumpNext<CR>
   nmap <buffer> <S-Tab> <Cmd>WikijumpPrev<CR>
-
-  " --------- vim-pandoc-style ---------
-  augroup pandoc_syntax
-    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
-  augroup END
 
   " ------------ FZF -------------------
   " Customize fzf colors to match your color scheme
