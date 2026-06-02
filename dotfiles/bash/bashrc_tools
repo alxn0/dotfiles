@@ -99,3 +99,13 @@ fi
 
 # --------------------- railway ---------------------- #
 source_if_exists "$HOME/.railway/env"
+
+# --------------------- zeit ------------------------- #
+if command -v zeit &> /dev/null; then
+  eval "$(zeit completion bash)"
+fi
+
+# --------------------- note ------------------------ #
+if command -v note &> /dev/null; then
+  eval "$(note init bash)"
+fi
