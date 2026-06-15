@@ -99,3 +99,8 @@ fi
 if command -v pet &> /dev/null; then
   eval "$(pet completion bash)"
 fi
+
+# --------------------- ferry ------------------------ #
+if command -v ferry &> /dev/null; then
+  eval "$(ferry completion bash)"
+fi
