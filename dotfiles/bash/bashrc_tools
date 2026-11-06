@@ -121,3 +121,9 @@ fi
 # ------------------ ~/.local/bin ------------------- #
 # User scripts (clip) and the Antigravity CLI.
 add_to_path_if_exists "" "$HOME/.local/bin"
+
+# --------------------- direnv ---------------------- #
+# Keep last: the hook must wrap every other prompt modification.
+if command -v direnv &> /dev/null; then
+  eval "$(direnv hook bash)"
+fi
