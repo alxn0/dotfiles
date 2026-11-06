@@ -152,16 +152,10 @@ let maplocalleader = ','
 " Yank to end of line (behave as D and C)
 nnoremap Y y$
 
-" Yank to system clipboard
-" Assume xclip is installed (and being on X11)
-" Don't understand why <C-Y> does not work instead of <leader>y
-vnoremap <leader>y :w !wl-copy<Cr><Cr>
-nnoremap <C-P> :r !wl-paste<Cr>
-
-" Yank/paste to/from tmux clipboard
-" DOES NOT WORK
-"vnoremap <C-y> y<cr>:call system("tmux load-buffer -", @0)<cr>gv
-"nnoremap <C-p> :let @0 = system("tmux save-buffer -")<cr>"0p<cr>g;
+" Yank to the local clipboard via OSC 52 (clip: works locally, over SSH
+" and in tmux). Paste with the terminal (Ctrl+Shift+V): OSC 52 reads are
+" blocked by the terminal.
+vnoremap <leader>y y:call system('clip', @0)<CR>
 
 " Quit terminal mode
 tnoremap <Esc> <C-\><C-n>

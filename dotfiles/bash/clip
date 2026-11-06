@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# clip — copy stdin to the local terminal's clipboard via OSC 52.
+# Works locally, over SSH and in tmux (needs `set-clipboard on`).
+# Writes to /dev/tty so it also works when stdout is captured (vim's system()).
+# Usage: cat file | clip
+set -euo pipefail
+printf '\e]52;c;%s\a' "$(base64 | tr -d '\n')" > /dev/tty
