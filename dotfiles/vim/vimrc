@@ -154,8 +154,8 @@ nnoremap Y y$
 " Yank to system clipboard
 " Assume xclip is installed (and being on X11)
 " Don't understand why <C-Y> does not work instead of <leader>y
-vnoremap <leader>y :w !xclip -sel clip<Cr><Cr>
-nnoremap <C-P> :r !xclip -o -sel clip<Cr>
+vnoremap <leader>y :w !wl-copy<Cr><Cr>
+nnoremap <C-P> :r !wl-paste<Cr>
 
 " Yank/paste to/from tmux clipboard
 " DOES NOT WORK
