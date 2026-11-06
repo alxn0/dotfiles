@@ -116,7 +116,3 @@ fi
 if [ -f "$HOME/.bashrc_tools" ]; then
   . "$HOME/.bashrc_tools"
 fi
-
-
-# Added by Antigravity CLI installer
-export PATH="/home/alex/.local/bin:$PATH"

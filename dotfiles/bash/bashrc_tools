@@ -105,3 +105,7 @@ fi
 if command -v ferry &> /dev/null; then
   eval "$(ferry completion bash)"
 fi
+
+# ------------------ ~/.local/bin ------------------- #
+# User scripts (clip) and the Antigravity CLI.
+add_to_path_if_exists "" "$HOME/.local/bin"
