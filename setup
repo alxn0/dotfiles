@@ -2,6 +2,8 @@
 set -e
 
 # Run each dotfiles/*/setup script.
+# A module is skipped when its folder name is not an installed command
+# (e.g. alacritty on a headless server).
 # A single module failure is reported but does not abort the others.
 
 # Always operate from the repository root, regardless of the caller's CWD.
@@ -10,11 +12,15 @@ cd "$(dirname "$0")"
 for folder in dotfiles/*/; do
   [ -f "$folder/setup" ] || continue
 
-  basename="$(basename "$folder")"
-  echo "Setup $basename"
+  name="$(basename "$folder")"
+  if ! command -v "$name" &> /dev/null; then
+    echo "Skip $name (not installed)"
+    continue
+  fi
+  echo "Setup $name"
 
   # Subshell keeps the cd local; no need to cd back.
   if ! ( cd "$folder" && ./setup ); then
-    echo "  ! $basename setup failed" >&2
+    echo "  ! $name setup failed" >&2
   fi
 done
