@@ -33,6 +33,12 @@ source_if_exists() {
     [ -f "$1" ] && . "$1"
 }
 
+# ------------------ mise -------------------- #
+# Runtimes and tools (node, python, go, uv...). Before the PATH tweaks below.
+if command -v mise &> /dev/null; then
+    eval "$(mise activate bash)"
+fi
+
 # ---------------------- z ------------------------- #
 source_if_exists "$HOME/.z.sh"
 
