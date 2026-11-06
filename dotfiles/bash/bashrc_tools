@@ -83,6 +83,7 @@ if command -v bun &> /dev/null || [ -d "$HOME/.bun" ]; then
 fi
 
 # --------------------- railway ---------------------- #
+export PATH="$HOME/.railway/bin:$PATH"
 source_if_exists "$HOME/.railway/env"
 
 # --------------------- zeit ------------------------- #
