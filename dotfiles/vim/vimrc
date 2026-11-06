@@ -2,11 +2,12 @@
 " note: design for VIM 8+
 
 " ------------------- General options --------------------------------
-set nocompatible    " Disable compatibility with vi
-set nobackup        " Do not save backup file
-set splitright      " Vertical split on the right
-set modifiable      " Make a buffer modifiable...
-set history=100     " Command history
+set nocompatible                  " Disable compatibility with vi
+set nobackup                      " Do not save backup file
+set splitright                    " Vertical split on the right
+set modifiable                    " Make a buffer modifiable...
+set history=100                   " Command history
+
 
 " ------------------- Color scheme -----------------------------------
 set background=dark
@@ -132,7 +133,7 @@ set completepopup+=highlight:Pmenu
 set completepopup+=align:item
 set completepopup+=border:off
 
-"" Use <C-Space> to trigger completion
+"" Use <C-Space> to trigger omnicompletion
 inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
 \ "\<lt>C-n>" :
 \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
