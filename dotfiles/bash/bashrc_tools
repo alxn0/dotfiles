@@ -118,10 +118,6 @@ if [ -S "${XDG_RUNTIME_DIR:-}/podman/podman.sock" ]; then
   export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 fi
 
-# ------------------ ~/.local/bin ------------------- #
-# User scripts (clip) and the Antigravity CLI.
-add_to_path_if_exists "" "$HOME/.local/bin"
-
 # --------------------- direnv ---------------------- #
 # Keep last: the hook must wrap every other prompt modification.
 if command -v direnv &> /dev/null; then
