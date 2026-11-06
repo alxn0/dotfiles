@@ -14,3 +14,10 @@ startup_mode = "Maximized"
 [window.padding]
 x = 5
 y = 5
+
+# Shift-Enter as kitty-protocol CSI-u sequence. Understood natively by
+# Claude Code; forwarded by tmux (extended-keys) to Vim as <S-CR>.
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B[13;2u"
