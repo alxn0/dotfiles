@@ -92,6 +92,11 @@ fi
 add_to_path_if_exists "" "$HOME/.railway/bin"
 source_if_exists "$HOME/.railway/env"
 
+# --------------------- tide ------------------------- #
+if command -v tide &> /dev/null; then
+  eval "$(tide completion bash)"
+fi
+
 # --------------------- zeit ------------------------- #
 if command -v zeit &> /dev/null; then
   eval "$(zeit completion bash)"
