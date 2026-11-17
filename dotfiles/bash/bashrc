@@ -7,6 +7,13 @@
 # for examples
 #
 
+# ---------------- Local, non-interactive too ---------- #
+# Settings for this machine or user only, kept outside this public repo and
+# loaded before the interactive check, so `ssh <host> '<command>'` sees them.
+if [ -f "$HOME/.bashrc_local" ]; then
+  . "$HOME/.bashrc_local"
+fi
+
 # ---------------- Interactive check -------- #
 # If not running interactively, don't do anything
 case $- in
